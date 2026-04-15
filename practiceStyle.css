@@ -1,0 +1,33 @@
+.box p {
+  color: rgb(38, 0, 255);
+}
+
+.box > p {
+  color: red;
+}
+
+/* CSS priority on a external css page flow from down to top
+    Last defined has high priority,
+    First defined has less priority.
+*/
+
+.container :nth-child(2n+1) {
+    color: rgb(255, 145, 0);
+}
+
+.btn:hover{
+    background: yellow;
+}
+
+.btn-arrow::after { content: "\2192";}
+/*Unicode of right arrow*/
+
+/* If we need to change the arrow mark,
+we can't change for each tag but with ::after we can change once here!
+*/
+
+.btn-arrow::after { content: "\2190";}
+/* That line no. 23 of right arrow will get ignored,
+lastly defined has right priority,
+We should replace that 23 with this unicode (good practice),
+I'm just having this as a notes
