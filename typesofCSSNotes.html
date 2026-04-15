@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Types of CSS</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 40px;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #2c3e50;
+    }
+
+    h1 {
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+    }
+
+    .section {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    code {
+      background: #eee;
+      padding: 3px 6px;
+      border-radius: 5px;
+    }
+
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background: #3498db;
+      color: white;
+      padding: 10px;
+    }
+
+    td {
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Types of CSS</h1>
+
+  <p>
+    CSS (Cascading Style Sheets) can be applied to HTML in three primary ways:
+    <b>Inline, Internal, and External</b>. Each method varies in scope, reusability,
+    and performance.
+  </p>
+
+  <div class="section">
+    <h2>1. Inline CSS</h2>
+    <p>Inline CSS applies styles directly to a specific HTML element using the <code>style</code> attribute.</p>
+
+    <pre>&lt;h1 style="color: blue;"&gt;Hello World&lt;/h1&gt;</pre>
+
+    <ul>
+      <li><b>Scope:</b> Only affects one element</li>
+      <li><b>Priority:</b> Highest</li>
+      <li><b>Best For:</b> Quick fixes</li>
+      <li><b>Drawback:</b> Hard to maintain</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>2. Internal CSS</h2>
+    <p>Defined inside a <code>&lt;style&gt;</code> tag in the <code>&lt;head&gt;</code> section.</p>
+
+    <pre>
+&lt;head&gt;
+  &lt;style&gt;
+    p { color: red; }
+  &lt;/style&gt;
+&lt;/head&gt;
+    </pre>
+
+    <ul>
+      <li><b>Scope:</b> Entire page</li>
+      <li><b>Priority:</b> Medium</li>
+      <li><b>Best For:</b> Single-page projects</li>
+      <li><b>Drawback:</b> Increases file size</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. External CSS</h2>
+    <p>Uses a separate <code>.css</code> file linked to HTML.</p>
+
+    <pre>&lt;link rel="stylesheet" href="styles.css"&gt;</pre>
+
+    <ul>
+      <li><b>Scope:</b> Multiple pages</li>
+      <li><b>Priority:</b> Lowest</li>
+      <li><b>Best For:</b> Large projects</li>
+      <li><b>Drawback:</b> Extra request (but cached)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Summary Comparison</h2>
+
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>Inline</th>
+        <th>Internal</th>
+        <th>External</th>
+      </tr>
+      <tr>
+        <td>Location</td>
+        <td>Inside tag</td>
+        <td>&lt;style&gt; in head</td>
+        <td>Separate file</td>
+      </tr>
+      <tr>
+        <td>Priority</td>
+        <td>Highest</td>
+        <td>High</td>
+        <td>Lowest</td>
+      </tr>
+      <tr>
+        <td>Reusability</td>
+        <td>None</td>
+        <td>Single page</td>
+        <td>Multiple pages</td>
+      </tr>
+      <tr>
+        <td>Maintainability</td>
+        <td>Difficult</td>
+        <td>Moderate</td>
+        <td>Easy</td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+</html>

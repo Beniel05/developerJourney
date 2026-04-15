@@ -1,0 +1,1226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML5 + CSS3 Interactive Notes</title>
+    <style>
+      :root {
+        --bg: #061426;
+        --panel: rgba(11, 22, 52, 0.96);
+        --text: #e7f3ff;
+        --muted: #a3c0ff;
+        --border: rgba(116, 142, 255, 0.2);
+        --accent: #7eabff;
+        --accent-2: #c7e0ff;
+        --chip: rgba(82, 108, 255, 0.18);
+        --soft: rgba(15, 24, 56, 0.88);
+        --shadow: 0 22px 50px rgba(8, 20, 60, 0.35);
+        --shadow-2: 0 10px 24px rgba(8, 20, 60, 0.22);
+        --radius: 20px;
+        --radius-sm: 14px;
+        --glow-1: rgba(104, 150, 255, 0.28);
+        --glow-2: rgba(80, 123, 255, 0.18);
+        --glow-3: rgba(42, 80, 255, 0.14);
+      }
+
+      .theme-royal {
+        --bg: #061426;
+        --panel: rgba(11, 22, 52, 0.96);
+        --text: #e7f3ff;
+        --muted: #a3c0ff;
+        --border: rgba(116, 142, 255, 0.2);
+        --accent: #7eabff;
+        --accent-2: #c7e0ff;
+        --chip: rgba(82, 108, 255, 0.18);
+        --soft: rgba(15, 24, 56, 0.88);
+        --shadow: 0 22px 50px rgba(8, 20, 60, 0.35);
+        --shadow-2: 0 10px 24px rgba(8, 20, 60, 0.22);
+        --glow-1: rgba(104, 150, 255, 0.28);
+        --glow-2: rgba(80, 123, 255, 0.18);
+        --glow-3: rgba(42, 80, 255, 0.14);
+        --summary-bg: rgba(17, 28, 55, 0.96);
+        --summary-border: rgba(126, 171, 255, 0.3);
+        --summary-text: #e7f3ff;
+      }
+
+      .theme-green {
+        --bg: #061b12;
+        --panel: rgba(10, 28, 24, 0.96);
+        --text: #def3da;
+        --muted: #a5d7ab;
+        --border: rgba(76, 176, 95, 0.2);
+        --accent: #4fe78d;
+        --accent-2: #96f7c0;
+        --chip: rgba(73, 176, 104, 0.2);
+        --soft: rgba(12, 30, 22, 0.88);
+        --shadow: 0 22px 50px rgba(6, 23, 18, 0.36);
+        --shadow-2: 0 10px 24px rgba(6, 23, 18, 0.22);
+        --glow-1: rgba(100, 215, 136, 0.24);
+        --glow-2: rgba(76, 190, 110, 0.16);
+        --glow-3: rgba(44, 132, 86, 0.12);
+        --summary-bg: rgba(19, 40, 28, 0.96);
+        --summary-border: rgba(76, 176, 95, 0.25);
+        --summary-text: #def3da;
+      }
+
+      .theme-white {
+        --bg: #f6f8fc;
+        --panel: #ffffff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --border: #e5e7eb;
+        --accent: #2563eb;
+        --accent-2: #0f766e;
+        --chip: #eef2ff;
+        --soft: #f9fafb;
+        --shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+        --shadow-2: 0 8px 20px rgba(15, 23, 42, 0.06);
+        --glow-1: rgba(37, 99, 235, 0.1);
+        --glow-2: rgba(15, 118, 110, 0.08);
+        --glow-3: rgba(255, 255, 255, 0.18);
+        --summary-bg: rgba(255, 255, 255, 0.9);
+        --summary-border: rgba(229, 231, 235, 0.9);
+        --summary-text: #111827;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, var(--glow-1), transparent 30%),
+          radial-gradient(circle at top right, var(--glow-2), transparent 28%),
+          radial-gradient(circle at 0 80%, var(--glow-3), transparent 24%),
+          var(--bg);
+        line-height: 1.65;
+      }
+
+      .app {
+        max-width: 1250px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .hero {
+        background:
+          linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.12),
+            rgba(255, 255, 255, 0.06)
+          ),
+          var(--panel);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        border-radius: 28px;
+        padding: 28px;
+        display: grid;
+        gap: 18px;
+        margin-bottom: 22px;
+        backdrop-filter: blur(10px);
+      }
+
+      .hero-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--chip);
+        color: var(--accent);
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.92rem;
+        width: fit-content;
+      }
+
+      h1 {
+        margin: 12px 0 8px;
+        font-size: clamp(2rem, 4vw, 3.3rem);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+      }
+
+      .subtitle {
+        max-width: 760px;
+        color: var(--muted);
+        font-size: 1.02rem;
+        margin: 0;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        min-width: min(100%, 460px);
+      }
+
+      .stat {
+        background: var(--soft);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 14px 16px;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .feature-card {
+        background: var(--soft);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 18px;
+        min-height: 124px;
+      }
+
+      .feature-card strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.98rem;
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.05rem;
+        margin-bottom: 4px;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .toolbar {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) auto auto auto;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .search {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 15px 16px;
+        font-size: 1rem;
+        background: var(--soft);
+        color: var(--text);
+        outline: none;
+        box-shadow: var(--shadow-2);
+      }
+
+      .search::placeholder {
+        color: var(--muted);
+      }
+
+      .theme-picker {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+
+      .theme-button {
+        min-width: 92px;
+        padding: 12px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: var(--soft);
+        color: var(--text);
+        box-shadow: var(--shadow-2);
+        transition:
+          transform 0.15s ease,
+          background-color 0.2s ease,
+          border-color 0.2s ease,
+          color 0.2s ease;
+      }
+
+      .theme-button:hover {
+        transform: translateY(-1px);
+      }
+
+      .theme-button.active {
+        background: var(--accent);
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+      }
+
+      .search:focus {
+        border-color: var(--accent);
+        box-shadow:
+          0 0 0 4px rgba(255, 255, 255, 0.14),
+          var(--shadow-2);
+      }
+
+      .btn {
+        border: 1px solid var(--border);
+        background: var(--soft);
+        color: var(--text);
+        padding: 14px 16px;
+        border-radius: 16px;
+        cursor: pointer;
+        font-weight: 700;
+        box-shadow: var(--shadow-2);
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease,
+          border-color 0.15s ease;
+        white-space: nowrap;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn.primary {
+        background: linear-gradient(135deg, var(--accent), #4f46e5);
+        color: #fff;
+        border-color: transparent;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 270px minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .sidebar,
+      .content {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        border-radius: 24px;
+      }
+
+      .sidebar {
+        padding: 18px;
+        position: sticky;
+        top: 18px;
+      }
+
+      .sidebar h2 {
+        font-size: 1rem;
+        margin: 4px 0 12px;
+      }
+
+      .toc {
+        display: grid;
+        gap: 8px;
+      }
+
+      .toc a {
+        text-decoration: none;
+        color: var(--text);
+        background: var(--soft);
+        border: 1px solid var(--border);
+        padding: 10px 12px;
+        border-radius: 14px;
+        font-size: 0.95rem;
+      }
+
+      .toc a:hover {
+        border-color: var(--accent);
+      }
+
+      .content {
+        padding: 18px;
+      }
+
+      .section-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      details.note {
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        background: var(--panel);
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      }
+
+      details.note[open] {
+        border-color: var(--accent);
+      }
+
+      summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 18px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        font-size: 1.03rem;
+        color: var(--summary-text);
+        background: var(--summary-bg);
+        border: 1px solid var(--summary-border);
+        border-radius: 18px;
+        transition:
+          background-color 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      summary::-webkit-details-marker,
+      summary::marker {
+        display: none;
+      }
+
+      .sum-right {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
+
+      .chev {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: inline-grid;
+        place-items: center;
+        background: var(--chip);
+        color: var(--accent);
+        transition: transform 0.2s ease;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      details[open] .chev {
+        transform: rotate(180deg);
+      }
+
+      .panel {
+        padding: 0 18px 18px;
+        border-top: 1px solid var(--border);
+      }
+
+      .panel-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .box {
+        background: var(--soft);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 14px;
+      }
+
+      .box h3 {
+        margin: 0 0 8px;
+        font-size: 0.98rem;
+      }
+
+      .box p,
+      .box ul {
+        margin: 0;
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      .box ul {
+        padding-left: 18px;
+      }
+
+      .example {
+        margin-top: 12px;
+        background: #0b1220;
+        color: #e5edf9;
+        border-radius: 16px;
+        padding: 14px;
+        overflow-x: auto;
+        font-size: 0.92rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .note-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .tag {
+        background: #eef2ff;
+        color: #3730a3;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .empty-state {
+        background: var(--soft);
+        border: 1px dashed var(--border);
+        border-radius: 20px;
+        padding: 28px 24px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.8;
+      }
+
+      .empty-state strong {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .footer-note {
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 980px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          position: static;
+        }
+        .toolbar {
+          grid-template-columns: 1fr;
+        }
+        .stats {
+          grid-template-columns: 1fr;
+          min-width: 0;
+        }
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+        .panel-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body class="theme-royal">
+    <div class="app">
+      <section class="hero">
+        <div class="hero-top">
+          <div>
+            <div class="eyebrow">HTML5 + CSS3 Interactive Notes</div>
+            <h1>Full study page with expandable explanations.</h1>
+            <p class="subtitle">
+              Built for clean revision: each topic opens on click, explains what
+              it is, why it matters, why it can be a bad choice sometimes, and
+              where it appears in real projects.
+            </p>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <strong>Accordion Notes</strong
+              ><span>One topic open at a time to avoid clutter.</span>
+            </div>
+            <div class="stat">
+              <strong>Real-World Focus</strong
+              ><span>Examples from forms, layouts, pages, and apps.</span>
+            </div>
+            <div class="stat">
+              <strong>Easy to Expand</strong
+              ><span>Add more topics without changing the design.</span>
+            </div>
+          </div>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <strong>All-in-one study page</strong>
+              <p>
+                31 structured topics covering HTML, CSS, layout, forms,
+                accessibility, and best practices.
+              </p>
+            </div>
+            <div class="feature-card">
+              <strong>Search, jump, explore</strong>
+              <p>
+                Use search, quick navigation, and expand/collapse controls for
+                fast review.
+              </p>
+            </div>
+            <div class="feature-card">
+              <strong>Short, useful examples</strong>
+              <p>
+                Each card includes a concise example, real-world use case, and
+                practical warnings.
+              </p>
+            </div>
+            <div class="feature-card">
+              <strong>Mobile-ready layout</strong>
+              <p>
+                The page adjusts cleanly for phones, tablets, and desktop
+                screens.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="toolbar">
+        <input
+          id="search"
+          class="search"
+          type="search"
+          placeholder="Search topics like flexbox, semantic, forms, grid..."
+        />
+        <button class="btn primary" id="expandAll">Expand all</button>
+        <button class="btn" id="collapseAll">Collapse all</button>
+        <div class="theme-picker">
+          <button class="btn theme-button active" data-theme="royal">
+            Royal Blue
+          </button>
+          <button class="btn theme-button" data-theme="green">
+            Forest Glow
+          </button>
+          <button class="btn theme-button" data-theme="white">Light</button>
+        </div>
+      </div>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <h2>Quick Navigation</h2>
+          <nav class="toc" id="toc"></nav>
+          <p class="footer-note">
+            Tip: use the search bar to filter topics instantly.
+          </p>
+        </aside>
+
+        <main class="content">
+          <div class="section-list" id="notes"></div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const topics = [
+        {
+          id: "html-intro",
+          title: "1) HTML5 Basics",
+          tags: ["foundation", "structure", "page skeleton"],
+          summary:
+            "HTML gives a page its structure. It tells the browser what each part of the page is.",
+          what: "Use HTML to define headings, paragraphs, links, images, forms, and page regions. Think of it as the skeleton of a webpage.",
+          why: "Without HTML, a browser has nothing meaningful to render. CSS and JavaScript depend on HTML elements to style and control behavior.",
+          whyNot:
+            "Do not use HTML for visual design decisions that belong in CSS, like spacing tricks or fake layout tables.",
+          example:
+            '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>Page</title>\n<\/head>\n<body>\n  <h1>Welcome</h1>\n<\/body>\n<\/html>',
+          realWorld:
+            "A news site uses HTML for the article title, author name, body text, sidebar, and footer. The same structure works even if the design changes later.",
+        },
+        {
+          id: "semantic-tags",
+          title: "2) Semantic Elements",
+          tags: ["SEO", "accessibility", "meaning"],
+          summary:
+            "Semantic tags describe the meaning of content, not just how it looks.",
+          what: "Use semantic tags such as <header>, <nav>, <main>, <section>, <article>, <aside>, and <footer> to label page regions and help browsers, assistive tech, and search engines understand structure.",
+          why: "Semantic markup improves accessibility, search ranking, and team readability. Users and screen readers can jump directly to navigation, main content, or article sections.",
+          whyNot:
+            "Do not use generic <div> containers when a semantic element fits. Older pages used only <div>, but modern HTML works better when meaning is explicit.",
+          example:
+            "<header>Site logo and menu</header>\n<nav><a href='#home'>Home</a></nav>\n<main><article><h1>Post title</h1><p>Article text</p></article></main>\n<aside>Related links</aside>\n<footer>Copyright</footer>",
+          realWorld:
+            "A blog page uses <article> for the post, <aside> for related reads, and <footer> for credits. That is easier to manage than one big anonymous <div>.",
+        },
+        {
+          id: "head-meta",
+          title: "3) Head, Title, Meta",
+          tags: ["seo", "browser info", "responsive"],
+          summary:
+            "The <head> contains metadata, title, charset, links, and responsive settings.",
+          what: "Use <head> for non-visible page metadata: <meta charset='UTF-8'>, viewport rules, <title>, stylesheet links, and description tags. UTF-8 is the modern default; UTF-16 and UTF-32 exist but are larger and much less common on the web.",
+          why: "Browsers read the head first. The charset controls how text is decoded, the title labels the browser tab, and metadata helps search engines and mobile devices understand the page.",
+          whyNot:
+            "Do not put visible content inside <head>. Avoid older charsets unless you specifically need them: UTF-16 and UTF-32 existed, but UTF-8 is the safest, most compatible choice for the web.",
+          example:
+            '<head>\n  <meta charset="UTF-8">\n  <meta http-equiv="X-UA-Compatible" content="IE=edge">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <meta name="description" content="Interactive HTML and CSS notes">\n  <title>Portfolio</title>\n  <link rel="stylesheet" href="styles.css">\n</head>',
+          realWorld:
+            "A modern page uses UTF-8 so accented letters, emojis, and international text display correctly. Older UTF-16 and UTF-32 pages still exist, but the web standard is UTF-8 because it is smaller and more compatible.",
+        },
+        {
+          id: "text-elements",
+          title: "4) Headings, Paragraphs, and Text",
+          tags: ["content", "readability", "structure"],
+          summary: "Text elements create readable content hierarchy.",
+          what: "Use headings for hierarchy, paragraphs for blocks of text, and inline tags like <strong>, <em>, and <span> for emphasis or small changes.",
+          why: "A page becomes easier to scan when headings and paragraphs are used properly.",
+          whyNot:
+            "Do not use heading tags just to make text big. Use them only according to document structure.",
+          example:
+            "<h1>HTML Notes</h1>\n<p>This page explains the basics.</p>\n<p><strong>Important:</strong> semantic tags matter.</p>",
+          realWorld:
+            "An online course page uses clear headings for modules and paragraphs for lesson descriptions so students can find topics quickly.",
+        },
+        {
+          id: "links",
+          title: "5) Links and Navigation",
+          tags: ["navigation", "routing", "cta"],
+          summary:
+            "Links connect pages, sections, files, and external resources with HTML anchors.",
+          what: "Use <a> for internal navigation, external websites, downloads, email links, and section jumps. Common attributes include href, target, rel, download, hreflang, and title.",
+          why: "Links are the web's main connection tool. They let users move between content, open external sites safely, and download files.",
+          whyNot:
+            "Do not use links for actions that change data unless JavaScript handles it carefully. Avoid empty href values and do not rely on <a> for non-navigation purposes.",
+          example:
+            '<a href="#forms">Go to Forms</a>\n<a href="https://example.com" target="_blank" rel="noopener noreferrer" title="External site">Visit site</a>\n<a href="guide.pdf" download>Download PDF</a>',
+          realWorld:
+            'A product page uses internal links for sections, external links with rel="noopener noreferrer" for safety, and download links for brochures.',
+        },
+        {
+          id: "images-media",
+          title: "6) Images, Audio, and Video",
+          tags: ["media", "content", "performance"],
+          summary:
+            "Media elements add visual and audio content while using attributes to improve performance and accessibility.",
+          what: "Use <img> for images with src, alt, width, height, loading, srcset, and sizes. Use <audio> and <video> with controls, autoplay, muted, loop, preload, and poster when needed.",
+          why: "Media makes content more engaging. Proper attributes help performance, accessibility, and responsive behavior across devices.",
+          whyNot:
+            "Do not use large files without responsive handling. Avoid images without descriptive alt text and avoid autoplaying audio without user consent.",
+          example:
+            '<img src="profile.jpg" alt="Student wearing headphones" width="480" height="320" loading="lazy" srcset="profile-480.jpg 480w, profile-800.jpg 800w" sizes="(max-width: 600px) 100vw, 480px">\n<video controls width="640" poster="preview.jpg">\n  <source src="intro.mp4" type="video/mp4">\n  <source src="intro.webm" type="video/webm">\n  Your browser does not support video.\n</video>',
+          realWorld:
+            "A restaurant site uses responsive images and a properly captioned video so the page loads fast and works on phones.",
+        },
+        {
+          id: "lists",
+          title: "7) Lists",
+          tags: ["organization", "steps", "menus"],
+          summary:
+            "Lists group related items, ordered steps, and definition pairs so content is easy to read.",
+          what: 'Use <ul> for bullet groups, <ol> for numbered sequences, and <dl> for definition lists. <ol> supports type="1"|"A"|"a"|"I"|"i", start="n" and reversed. Use CSS list-style-type for custom bullets.',
+          why: "Lists are semantic and accessible. They communicate grouping and order clearly to users, screen readers, and search engines.",
+          whyNot:
+            "Do not fake a list with line breaks or repeated paragraphs. Avoid deprecated styling attributes on lists; use CSS when possible.",
+          example:
+            '<ul>\n  <li>HTML</li>\n  <li>CSS</li>\n</ul>\n<ol type="A" start="3">\n  <li>Plan</li>\n  <li>Build</li>\n</ol>\n<ol type="i" reversed>\n  <li>Review</li>\n  <li>Launch</li>\n</ol>\n<dl>\n  <dt>HTML</dt>\n  <dd>Structure language</dd>\n  <dt>CSS</dt>\n  <dd>Style language</dd>\n</dl>',
+          realWorld:
+            'A project checklist uses <ol type="1"> for steps and a glossary uses <dl> to pair terms with definitions.',
+        },
+        {
+          id: "tables",
+          title: "8) Tables",
+          tags: ["data", "comparison", "rows"],
+          summary: "Tables are for structured tabular data, not page layout.",
+          what: "Use tables for comparing rows and columns of information like schedules, marks, or price charts.",
+          why: "They keep data aligned and easy to understand.",
+          whyNot:
+            "Do not use tables to arrange page content. Layout should be done with CSS flexbox or grid.",
+          example:
+            "<table>\n  <tr><th>Item</th><th>Price</th></tr>\n  <tr><td>Book</td><td>$10</td></tr>\n</table>",
+          realWorld:
+            "A college timetable is a classic table use case because time slots and days need clear alignment.",
+        },
+        {
+          id: "forms",
+          title: "9) Forms and Inputs",
+          tags: ["input", "validation", "interaction"],
+          summary:
+            "Forms collect user input and submit it to the server with clear structure and validation.",
+          what: 'Use <form action="/submit" method="post" autocomplete="on" novalidate> and group form controls with labels, fieldsets, and legends. Every input should have a matching label or aria-label.',
+          why: "Forms are the interface for data entry. Clear labels, required fields, and accessible controls reduce errors and improve completion.",
+          whyNot:
+            "Do not leave out action or method. Avoid placeholder-only labels, and do not rely solely on browser validation for required inputs.",
+          example:
+            '<form action="/save" method="post" autocomplete="on">\n  <label for="name">Name</label>\n  <input id="name" name="name" type="text" required>\n  <label for="email">Email</label>\n  <input id="email" name="email" type="email" autocomplete="email" required>\n  <button type="submit">Save</button>\n</form>',
+          realWorld:
+            "A signup form uses semantic labels, required fields, and autocomplete hints so users can finish faster and make fewer mistakes.",
+        },
+        {
+          id: "input-types",
+          title: "10) Useful HTML5 Input Types",
+          tags: ["email", "date", "mobile-friendly"],
+          summary:
+            "HTML5 input types improve mobile keyboards, browser validation, and user convenience.",
+          what: "Use the right input type for the data: text, email, password, tel, url, search, number, range, date, datetime-local, time, color, file, checkbox, radio, hidden. Common attributes include placeholder, required, min, max, step, pattern, readonly, and autocomplete.",
+          why: "Specific input types help browsers show proper keyboards, validate values, and improve the user experience.",
+          whyNot:
+            'Do not use type="text" for email, phone, number, or date fields. You lose built-in assistance and the browser cannot help the user as much.',
+          example:
+            '<input type="email" name="email" placeholder="name@example.com" required>\n<input type="tel" name="phone" pattern="\\d{3}-\\d{3}-\\d{4}" placeholder="123-456-7890">\n<input type="number" name="quantity" min="1" max="10" step="1">\n<input type="date" name="dueDate">',
+          realWorld:
+            "A registration form uses email, tel, date, and number types so each field is easier to complete and more accurate.",
+        },
+        {
+          id: "media-embed",
+          title: "11) iframe, embed, and object",
+          tags: ["embed", "integration", "external content"],
+          summary: "Embedding lets you include content from other sources.",
+          what: "Use iframe for maps, videos, or dashboards when external content must be shown inside your page.",
+          why: "It saves development time when a trusted external service already provides the content.",
+          whyNot:
+            "Do not embed random unsafe content. It can be heavy, insecure, or distracting.",
+          example:
+            '<iframe src="https://maps.example.com" title="Campus map"></iframe>',
+          realWorld:
+            "A travel site might embed a map showing the hotel location instead of building its own map engine.",
+        },
+        {
+          id: "accessibility",
+          title: "12) Accessibility Basics",
+          tags: ["a11y", "alt text", "keyboard"],
+          summary: "Accessibility makes pages usable for more people.",
+          what: "Use labels, alt text, semantic tags, correct heading order, and visible focus states.",
+          why: "Accessible pages work better for screen readers, keyboard users, and users with low vision.",
+          whyNot:
+            "Do not rely only on color to communicate meaning. Do not remove focus outlines without replacement.",
+          example:
+            '<button>Submit</button>\n<img src="chart.png" alt="Sales growth chart showing steady increase">',
+          realWorld:
+            "A government service portal must be easy to use with a keyboard because many users depend on assistive tech.",
+        },
+        {
+          id: "css-inline-internal-external",
+          title: "13) Inline, Internal, and External CSS",
+          tags: ["style methods", "priority", "best practice"],
+          summary:
+            "CSS can be written in three main ways. Each has a different purpose and trade-off.",
+          what: "Inline CSS styles a single element. Internal CSS is written in a style tag inside the page. External CSS lives in a separate file.",
+          why: "Inline is useful for quick one-off changes. Internal is convenient for a single page. External is best for reusable, maintainable projects.",
+          whyNot:
+            "Do not overuse inline CSS. It becomes messy fast and is hard to maintain across many elements.",
+          example:
+            '<p style="color: red;">Inline</p>\n<style> p { color: red; } </style>\n<link rel="stylesheet" href="styles.css">',
+          realWorld:
+            "A large website uses external CSS so the same design rules can control the homepage, blog, and product pages.",
+        },
+        {
+          id: "cascade-specificity",
+          title: "14) Cascade, Specificity, and Inheritance",
+          tags: ["css logic", "priority", "debugging"],
+          summary:
+            "CSS decides which rule wins using cascade order, selector strength, and inheritance.",
+          what: "More specific selectors override less specific ones, and later rules may override earlier ones when specificity is equal.",
+          why: "Understanding this is the key to debugging “why is my style not working?”",
+          whyNot:
+            "Do not keep adding !important everywhere. That usually hides bad structure and makes maintenance harder.",
+          example:
+            ".card p { color: blue; }\n#special { color: red; }\n/* ID wins because it is more specific */",
+          realWorld:
+            "In a dashboard, a global button style may be overridden by a special warning button style on a critical page.",
+        },
+        {
+          id: "selectors",
+          title: "15) CSS Selectors",
+          tags: ["targeting", "reusability", "control"],
+          summary: "Selectors target elements for styling.",
+          what: "Use element selectors, class selectors, id selectors, attribute selectors, and combinators like child and descendant.",
+          why: "Good selectors keep CSS clean and reusable.",
+          whyNot:
+            "Do not make every rule overly specific. Deeply nested selectors are harder to reuse and override.",
+          example:
+            '.card > h2 { font-size: 1.2rem; }\ninput[type="email"] { border-color: green; }',
+          realWorld:
+            "A form designer styles all email inputs the same while giving selected cards a custom heading style.",
+        },
+        {
+          id: "box-model",
+          title: "16) Box Model",
+          tags: ["margin", "padding", "layout"],
+          summary:
+            "Every element is a box made of content, padding, border, and margin.",
+          what: "The box model controls spacing and size. It explains why elements take up the space they do.",
+          why: "Once you understand the box model, layout bugs become easier to solve.",
+          whyNot:
+            "Do not use random margin hacks when a proper box model decision would be cleaner.",
+          example:
+            ".card { padding: 16px; border: 1px solid #ddd; margin-bottom: 12px; }",
+          realWorld:
+            "A blog post card needs inner padding for readable text and outer margin so cards do not touch each other.",
+        },
+        {
+          id: "display",
+          title: "17) display Property",
+          tags: ["block", "inline", "layout behavior"],
+          summary: "display changes how elements flow and behave in a layout.",
+          what: "Common values include block, inline, inline-block, flex, grid, and none.",
+          why: "It helps control whether an element takes full width, stays inline, or becomes a layout container.",
+          whyNot:
+            "Do not use display: none for content that must remain accessible or announced unless you truly want it removed from layout.",
+          example:
+            ".menu { display: flex; }\n.badge { display: inline-block; }",
+          realWorld:
+            "A navbar often uses flex so the logo, links, and button align neatly in one row.",
+        },
+        {
+          id: "positioning",
+          title: "18) Positioning",
+          tags: ["sticky", "fixed", "overlay"],
+          summary:
+            "Positioning helps place elements exactly where they need to go.",
+          what: "Use static, relative, absolute, fixed, and sticky to control how items sit on the page.",
+          why: "It is useful for dropdowns, badges, floating buttons, and sticky headers.",
+          whyNot:
+            "Do not use absolute positioning to build your entire page layout. That becomes fragile on different screen sizes.",
+          example: ".toast { position: fixed; bottom: 16px; right: 16px; }",
+          realWorld:
+            "A chat app uses a fixed message box at the bottom-right, while the conversation list scrolls normally.",
+        },
+        {
+          id: "flexbox",
+          title: "19) Flexbox",
+          tags: ["1d layout", "alignment", "center"],
+          summary: "Flexbox is designed for arranging items in one direction.",
+          what: "Use it for rows or columns that need alignment, spacing, and flexible resizing.",
+          why: "Flexbox is ideal for navbars, button rows, card footers, and centered content.",
+          whyNot:
+            "Do not force flexbox to solve complex two-dimensional layouts when grid is a better fit.",
+          example:
+            ".row { display: flex; justify-content: space-between; align-items: center; }",
+          realWorld:
+            "A login form row with label and input, or a card footer with price and button, is a classic flexbox case.",
+        },
+        {
+          id: "grid",
+          title: "20) CSS Grid",
+          tags: ["2d layout", "page structure", "responsive"],
+          summary:
+            "Grid is built for two-dimensional layouts with rows and columns.",
+          what: "Use grid for page layouts, galleries, dashboards, and card systems.",
+          why: "Grid makes it easier to define a real page structure without messy hacks.",
+          whyNot:
+            "Do not use grid when you only need a simple row of items. Flexbox may be simpler there.",
+          example:
+            ".layout { display: grid; grid-template-columns: 240px 1fr; gap: 20px; }",
+          realWorld:
+            "A dashboard uses grid for sidebar, top bar, statistics, and chart sections.",
+        },
+        {
+          id: "responsive",
+          title: "21) Responsive Design and Media Queries",
+          tags: ["mobile", "adaptable", "breakpoints"],
+          summary:
+            "Responsive design makes layouts work on phones, tablets, and desktops.",
+          what: "Use flexible units, fluid grids, images, and media queries to adapt the layout to screen size.",
+          why: "Most users browse on multiple device sizes, so a fixed-width site often breaks the experience.",
+          whyNot:
+            "Do not design only for a large monitor and hope the phone will “auto-fix” itself.",
+          example:
+            "@media (max-width: 768px) {\n  .layout { grid-template-columns: 1fr; }\n}",
+          realWorld:
+            "An online store may show four product columns on desktop, two on tablet, and one on mobile.",
+        },
+        {
+          id: "units",
+          title: "22) Units: px, %, em, rem, vh, vw",
+          tags: ["sizing", "scaling", "responsive"],
+          summary: "Different units serve different sizing needs.",
+          what: "px is fixed, % is relative to the parent, em/rem scale with text size, and vw/vh relate to the viewport.",
+          why: "Using the right unit improves responsive design and text scaling.",
+          whyNot:
+            "Do not use only fixed pixels for everything. It can make layouts rigid and less accessible.",
+          example:
+            ".container { width: 90%; max-width: 1200px; }\nh1 { font-size: 2rem; }",
+          realWorld:
+            "A page wrapper uses max-width in pixels but width in percentage so it stays centered and responsive.",
+        },
+        {
+          id: "typography",
+          title: "23) Typography",
+          tags: ["font", "readability", "brand"],
+          summary: "Typography controls how text looks and feels.",
+          what: "Use font-family, font-size, line-height, letter-spacing, and font-weight to improve readability and brand style.",
+          why: "Good typography makes content easier to read and gives the site a professional look.",
+          whyNot:
+            "Do not use too many fonts or small text everywhere. That hurts clarity and consistency.",
+          example: "body { font-family: Arial, sans-serif; line-height: 1.6; }",
+          realWorld:
+            "A learning platform uses larger line-height and clean fonts to keep long lessons comfortable to read.",
+        },
+        {
+          id: "colors-backgrounds",
+          title: "24) Colors, Backgrounds, and Gradients",
+          tags: ["theme", "branding", "visuals"],
+          summary: "Color choices shape the mood and readability of the page.",
+          what: "Use colors for text, borders, backgrounds, and gradients. Keep contrast strong enough for reading.",
+          why: "Color helps users understand emphasis, groups, alerts, and branding.",
+          whyNot:
+            "Do not rely on low-contrast text or too many bright colors. It becomes tiring and inaccessible.",
+          example: "background: linear-gradient(135deg, #2563eb, #4f46e5);",
+          realWorld:
+            "A payment app uses green for success, red for errors, and a calm neutral background for the main layout.",
+        },
+        {
+          id: "borders-shadows",
+          title: "25) Borders, Radius, and Shadows",
+          tags: ["depth", "cards", "ui"],
+          summary: "These properties give elements shape and depth.",
+          what: "Borders define edges, border-radius softens corners, and shadows create separation from the background.",
+          why: "They are common in modern card UIs, buttons, and dialogs.",
+          whyNot:
+            "Do not overuse heavy shadows. The page can look messy and noisy.",
+          example:
+            ".card { border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }",
+          realWorld:
+            "Product cards in shopping apps use rounded corners and shadows to feel tappable and distinct.",
+        },
+        {
+          id: "transitions-transforms",
+          title: "26) Transitions and Transforms",
+          tags: ["motion", "hover", "micro-interactions"],
+          summary:
+            "Motion makes interfaces feel smoother and easier to understand.",
+          what: "Use transitions for gradual change and transforms for scaling, moving, or rotating elements.",
+          why: "Tiny movement can make hover states and feedback feel polished.",
+          whyNot:
+            "Do not make every animation flashy. Too much motion can distract users.",
+          example:
+            ".btn:hover { transform: translateY(-2px); transition: 0.2s ease; }",
+          realWorld:
+            "A button slightly lifts on hover, giving the user a clear hint that it is clickable.",
+        },
+        {
+          id: "animations",
+          title: "27) CSS Animations",
+          tags: ["motion", "loading", "attention"],
+          summary: "Animations can show progress, loading, or focus.",
+          what: "Use keyframes and animation properties for repeated or timed motion.",
+          why: "They are useful for loaders, subtle attention shifts, and engaging interfaces.",
+          whyNot:
+            "Do not animate without purpose. Decorative movement should never make content harder to use.",
+          example:
+            "@keyframes pulse {\n  0% { opacity: 0.7; }\n  50% { opacity: 1; }\n  100% { opacity: 0.7; }\n}",
+          realWorld:
+            "A loading skeleton or spinner helps users understand that data is still being fetched.",
+        },
+        {
+          id: "variables",
+          title: "28) CSS Variables",
+          tags: ["theme", "reuse", "maintenance"],
+          summary: "Variables store reusable values like colors and spacing.",
+          what: "Define custom properties with --name and reuse them with var().",
+          why: "They make theme changes easier and reduce repeated values.",
+          whyNot:
+            "Do not hardcode the same color in 20 places when one variable can control it all.",
+          example:
+            ":root { --primary: #2563eb; }\nbutton { background: var(--primary); }",
+          realWorld:
+            "A dark mode system can switch one set of variables and instantly recolor the whole app.",
+        },
+        {
+          id: "overflow-zindex",
+          title: "29) Overflow, z-index, and Layers",
+          tags: ["stacking", "scroll", "overlays"],
+          summary:
+            "These properties control clipping, scrolling, and stacking order.",
+          what: "Overflow handles extra content. z-index controls which layer appears on top when positioned elements overlap.",
+          why: "You need them for modals, tooltips, dropdowns, and scroll containers.",
+          whyNot:
+            "Do not raise z-index endlessly without understanding stacking context. That turns into a fight you cannot debug easily.",
+          example: ".dropdown { position: absolute; z-index: 10; }",
+          realWorld:
+            "A dropdown menu must appear above the page content without being cut off by nearby containers.",
+        },
+        {
+          id: "pseudo",
+          title: "30) Pseudo-classes and Pseudo-elements",
+          tags: ["state", "before", "after"],
+          summary: "These let you style states or parts of an element.",
+          what: "Pseudo-classes like :hover and :focus style states. Pseudo-elements like ::before and ::after create decorative pieces.",
+          why: "They reduce extra HTML and make interaction states more expressive.",
+          whyNot:
+            "Do not use pseudo-elements to insert important content because assistive technologies may not treat them like real text.",
+          example:
+            'button:hover { background: #1d4ed8; }\n.card::before { content: ""; }',
+          realWorld:
+            "A menu item highlights on hover, and a card can have a small decorative stripe without extra HTML.",
+        },
+        {
+          id: "best-practices",
+          title: "31) Clean HTML and CSS Best Practices",
+          tags: ["maintenance", "teamwork", "scalability"],
+          summary: "Good structure saves time later.",
+          what: "Keep HTML semantic, class names clear, CSS organized, and layouts responsive from the beginning.",
+          why: "Clean code is easier to debug, share, and extend when the project grows.",
+          whyNot:
+            "Do not build with random tags, messy class names, and repeated styles if you want the page to stay manageable.",
+          example:
+            "Use .card, .card-title, .card-body instead of vague names like .box1 or .thing.",
+          realWorld:
+            "A team project becomes far easier when one developer can understand another developer’s HTML and CSS in minutes.",
+        },
+      ];
+
+      const notesEl = document.getElementById("notes");
+      const tocEl = document.getElementById("toc");
+      const searchEl = document.getElementById("search");
+      const expandAllBtn = document.getElementById("expandAll");
+      const collapseAllBtn = document.getElementById("collapseAll");
+
+      const escapeHtml = (str) =>
+        str
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;");
+
+      function openTopic(id) {
+        const detail = document.getElementById(id);
+        if (detail) {
+          detail.open = true;
+          detail.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+
+      function renderTopics(filter = "") {
+        const q = filter.trim().toLowerCase();
+        notesEl.innerHTML = "";
+        tocEl.innerHTML = "";
+        let matchedCount = 0;
+
+        topics.forEach((topic) => {
+          const haystack = [
+            topic.title,
+            topic.summary,
+            topic.what,
+            topic.why,
+            topic.whyNot,
+            topic.realWorld,
+            ...(topic.tags || []),
+          ]
+            .join(" ")
+            .toLowerCase();
+          if (q && !haystack.includes(q)) return;
+
+          matchedCount += 1;
+          const details = document.createElement("details");
+          details.className = "note";
+          details.id = topic.id;
+          details.innerHTML = `
+          <summary>
+            <span>${escapeHtml(topic.title)}</span>
+            <span class="sum-right"><span class="chev">⌄</span></span>
+          </summary>
+          <div class="panel">
+            <p style="margin:14px 0 0;color:var(--muted);font-weight:600;">${escapeHtml(topic.summary)}</p>
+            <div class="panel-grid">
+              <div class="box">
+                <h3>What is it?</h3>
+                <p>${escapeHtml(topic.what)}</p>
+              </div>
+              <div class="box">
+                <h3>Why should you use it?</h3>
+                <p>${escapeHtml(topic.why)}</p>
+              </div>
+              <div class="box">
+                <h3>Why should you not?</h3>
+                <p>${escapeHtml(topic.whyNot)}</p>
+              </div>
+              <div class="box">
+                <h3>Real-world example</h3>
+                <p>${escapeHtml(topic.realWorld)}</p>
+              </div>
+            </div>
+            <div class="example"><strong>Example</strong><br><pre style="margin:10px 0 0; white-space:pre-wrap;">${escapeHtml(topic.example)}</pre></div>
+            <div class="note-tags">
+              ${(topic.tags || []).map((tag) => `<span class="tag">${tag}</span>`).join("")}
+            </div>
+          </div>
+        `;
+          notesEl.appendChild(details);
+
+          const link = document.createElement("a");
+          link.href = `#${topic.id}`;
+          link.textContent = topic.title;
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            window.history.pushState(null, "", `#${topic.id}`);
+            openTopic(topic.id);
+          });
+          tocEl.appendChild(link);
+        });
+
+        if (!matchedCount) {
+          notesEl.innerHTML = `
+            <div class="empty-state">
+              <strong>No topics found.</strong>
+              <p>Try a different keyword or clear the search to browse the full HTML / CSS guide.</p>
+            </div>
+          `;
+        }
+      }
+
+      function setAll(openState) {
+        document
+          .querySelectorAll("details.note")
+          .forEach((d) => (d.open = openState));
+      }
+
+      const themeButtons = document.querySelectorAll(".theme-button");
+
+      function setTheme(theme) {
+        document.body.classList.remove(
+          "theme-royal",
+          "theme-green",
+          "theme-white",
+        );
+        document.body.classList.add(`theme-${theme}`);
+        themeButtons.forEach((button) => {
+          button.classList.toggle("active", button.dataset.theme === theme);
+        });
+      }
+
+      themeButtons.forEach((button) => {
+        button.addEventListener("click", () => setTheme(button.dataset.theme));
+      });
+
+      searchEl.addEventListener("input", () => renderTopics(searchEl.value));
+      expandAllBtn.addEventListener("click", () => setAll(true));
+      collapseAllBtn.addEventListener("click", () => setAll(false));
+
+      function openTopicFromHash() {
+        const id = window.location.hash.slice(1);
+        if (id) openTopic(id);
+      }
+
+      window.addEventListener("hashchange", openTopicFromHash);
+
+      renderTopics();
+      openTopicFromHash();
+    </script>
+  </body>
+</html>
