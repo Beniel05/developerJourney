@@ -1,219 +1,742 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSS Complete Notes</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Complete Notes</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 40px;
-      background: #f9f9f9;
-      color: #333;
-    }
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 40px;
+        background: #f9f9f9;
+        color: #333;
+      }
 
-    h1, h2 {
-      color: #2c3e50;
-    }
+      h1,
+      h2 {
+        color: #2c3e50;
+      }
 
-    h1 {
-      border-bottom: 3px solid #3498db;
-      padding-bottom: 10px;
-    }
+      h1 {
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+      }
 
-    .section {
-      background: #fff;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
+      .section {
+        background: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
 
-    code {
-      background: #eee;
-      padding: 3px 6px;
-      border-radius: 5px;
-    }
+      code {
+        background: #eee;
+        padding: 3px 6px;
+        border-radius: 5px;
+      }
 
-    pre {
-      background: #272822;
-      color: #f8f8f2;
-      padding: 15px;
-      border-radius: 8px;
-      overflow-x: auto;
-    }
+      pre {
+        background: #272822;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 8px;
+        overflow-x: auto;
+      }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
 
-    table, th, td {
-      border: 1px solid #ddd;
-    }
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
 
-    th {
-      background: #3498db;
-      color: white;
-      padding: 10px;
-    }
+      th {
+        background: #3498db;
+        color: white;
+        padding: 10px;
+      }
 
-    td {
-      padding: 10px;
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
+      td {
+        padding: 10px;
+        text-align: center;
+      }
 
-  <h1>CSS Complete Notes</h1>
+      input {
+        padding: 8px;
+        margin: 5px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
 
-  <!-- TYPES OF CSS -->
-  <div class="section">
-    <h2>Types of CSS</h2>
+      .demo-box {
+        background: #3498db;
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 8px;
+      }
 
-    <p>
-      CSS can be applied in three ways: <b>Inline, Internal, and External</b>.
-      Each has different use cases depending on project size and maintainability.
-    </p>
+      .color-box {
+        margin-top: 15px;
+        padding: 20px;
+        border-radius: 10px;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        background: rgba(52, 152, 219, 1);
+        transition: 0.3s;
+      }
 
-    <h3>1. Inline CSS</h3>
-    <pre>&lt;h1 style="color: blue;"&gt;Hello World&lt;/h1&gt;</pre>
-    <ul>
-      <li><b>Scope:</b> One element</li>
-      <li><b>Use:</b> Quick fixes</li>
-      <li><b>Problem:</b> Not scalable</li>
-    </ul>
+      label {
+        display: inline-block;
+        margin-top: 10px;
+        font-weight: bold;
+      }
 
-    <h3>2. Internal CSS</h3>
-    <pre>
+      /* COLOR MIX VISUAL */
+      .mix-demo {
+        position: relative;
+        height: 120px;
+        margin: 20px 0;
+      }
+
+      .circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        position: absolute;
+        opacity: 0.7;
+      }
+
+      .red {
+        background: red;
+        left: 20px;
+      }
+
+      .green {
+        background: green;
+        left: 60px;
+      }
+
+      .blue {
+        background: blue;
+        left: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS Complete Notes</h1>
+
+    <!-- TYPES OF CSS -->
+    <div class="section">
+      <h2>Types of CSS</h2>
+
+      <p>
+        CSS can be applied in three ways: <b>Inline, Internal, and External</b>.
+        Each has different use cases depending on project size and
+        maintainability.
+      </p>
+
+      <h3>1. Inline CSS</h3>
+      <pre>&lt;h1 style="color: blue;"&gt;Hello World&lt;/h1&gt;</pre>
+      <ul>
+        <li><b>Scope:</b> One element</li>
+        <li><b>Use:</b> Quick fixes</li>
+        <li><b>Problem:</b> Not scalable</li>
+      </ul>
+
+      <h3>2. Internal CSS</h3>
+      <pre>
 &lt;style&gt;
   p { color: red; }
 &lt;/style&gt;
-    </pre>
-    <ul>
-      <li><b>Scope:</b> Single page</li>
-      <li><b>Use:</b> Small projects</li>
-      <li><b>Problem:</b> Not reusable</li>
-    </ul>
+    </pre
+      >
+      <ul>
+        <li><b>Scope:</b> Single page</li>
+        <li><b>Use:</b> Small projects</li>
+        <li><b>Problem:</b> Not reusable</li>
+      </ul>
 
-    <h3>3. External CSS</h3>
-    <pre>&lt;link rel="stylesheet" href="styles.css"&gt;</pre>
-    <ul>
-      <li><b>Scope:</b> Multiple pages</li>
-      <li><b>Use:</b> Real-world apps</li>
-      <li><b>Best Practice:</b> Always preferred</li>
-    </ul>
-  </div>
+      <h3>3. External CSS</h3>
+      <pre>&lt;link rel="stylesheet" href="styles.css"&gt;</pre>
+      <ul>
+        <li><b>Scope:</b> Multiple pages</li>
+        <li><b>Use:</b> Real-world apps</li>
+        <li><b>Best Practice:</b> Always preferred</li>
+      </ul>
+    </div>
 
-  <!-- SELECTORS -->
-  <div class="section">
-    <h2>CSS Selectors</h2>
+    <!-- SELECTORS -->
+    <div class="section">
+      <h2>CSS Selectors</h2>
 
-    <p>
-      CSS selectors are used to target HTML elements for styling.
-      They act as a bridge between HTML and CSS.
-    </p>
+      <p>
+        CSS selectors are used to target HTML elements for styling. They act as
+        a bridge between HTML and CSS.
+      </p>
 
-    <h3>1. Core Selectors</h3>
+      <h3>1. Core Selectors</h3>
 
-    <p><b>Universal Selector (*)</b></p>
-    <pre>* { margin: 0; padding: 0; }</pre>
-    <p>Targets all elements. Used for reset.</p>
+      <p><b>Universal Selector (*)</b></p>
+      <pre>* { margin: 0; padding: 0; }</pre>
+      <p>Targets all elements. Used for reset.</p>
 
-    <p><b>Element Selector</b></p>
-    <pre>p { color: blue; }</pre>
-    <p>Targets all elements of a type.</p>
+      <p><b>Element Selector</b></p>
+      <pre>p { color: blue; }</pre>
+      <p>Targets all elements of a type.</p>
 
-    <p><b>Class Selector (.class)</b></p>
-    <pre>.card { border: 1px solid #ccc; }</pre>
-    <p>Reusable and recommended for styling.</p>
+      <p><b>Class Selector (.class)</b></p>
+      <pre>.card { border: 1px solid #ccc; }</pre>
+      <p>Reusable and recommended for styling.</p>
 
-    <p><b>ID Selector (#id)</b></p>
-    <pre>#header { background: black; }</pre>
-    <p>Used for unique elements. Avoid overuse.</p>
-  </div>
+      <p><b>ID Selector (#id)</b></p>
+      <pre>#header { background: black; }</pre>
+      <p>Used for unique elements. Avoid overuse.</p>
+    </div>
 
-  <!-- COMBINATORS -->
-  <div class="section">
-    <h2>Combinators (Relationships)</h2>
+    <!-- COMBINATORS -->
+    <div class="section">
+      <h2>Combinators (Relationships)</h2>
 
-    <p><b>Descendant</b></p>
-    <pre>div p { color: red; }</pre>
-    <p>Targets all p inside div.</p>
+      <p><b>Descendant</b></p>
+      <pre>div p { color: red; }</pre>
+      <p>Targets all p inside div.</p>
 
-    <p><b>Child</b></p>
-    <pre>div > p { color: green; }</pre>
-    <p>Only direct children.</p>
+      <p><b>Child</b></p>
+      <pre>div > p { color: green; }</pre>
+      <p>Only direct children.</p>
 
-    <p><b>Adjacent Sibling</b></p>
-    <pre>h1 + p { color: orange; }</pre>
-    <p>First p after h1.</p>
+      <p><b>Adjacent Sibling</b></p>
+      <pre>h1 + p { color: orange; }</pre>
+      <p>First p after h1.</p>
 
-    <p><b>General Sibling</b></p>
-    <pre>h1 ~ p { color: purple; }</pre>
-    <p>All p after h1.</p>
-  </div>
+      <p><b>General Sibling</b></p>
+      <pre>h1 ~ p { color: purple; }</pre>
+      <p>All p after h1.</p>
+    </div>
 
-  <!-- ADVANCED -->
-  <div class="section">
-    <h2>Advanced Selectors</h2>
+    <!-- ADVANCED -->
+    <div class="section">
+      <h2>Advanced Selectors</h2>
 
-    <p><b>Attribute Selector</b></p>
-    <pre>a[target="_blank"] { color: red; }</pre>
+      <p><b>Attribute Selector</b></p>
+      <pre>a[target="_blank"] { color: red; }</pre>
 
-    <p><b>Pseudo-class</b></p>
-    <pre>button:hover { background: blue; }</pre>
+      <p><b>Pseudo-class</b></p>
+      <pre>button:hover { background: blue; }</pre>
 
-    <p><b>Pseudo-element</b></p>
-    <pre>p::first-letter { font-size: 30px; }</pre>
-  </div>
+      <p><b>Pseudo-element</b></p>
+      <pre>p::first-letter { font-size: 30px; }</pre>
+    </div>
 
-  <!-- PRINCIPLES -->
-  <div class="section">
-    <h2>Key Principles</h2>
+    <!-- PRINCIPLES -->
+    <div class="section">
+      <h2>Key Principles</h2>
 
-    <p><b>Specificity Priority:</b></p>
-    <pre>Inline > ID > Class > Element</pre>
+      <p><b>Specificity Priority:</b></p>
+      <pre>Inline > ID > Class > Element</pre>
 
-    <p><b>Grouping:</b></p>
-    <pre>h1, h2, p { color: blue; }</pre>
-  </div>
+      <p><b>Grouping:</b></p>
+      <pre>h1, h2, p { color: blue; }</pre>
+    </div>
 
-  <!-- SUMMARY TABLE -->
-  <div class="section">
-    <h2>Summary Comparison</h2>
+    <!-- SUMMARY TABLE -->
+    <div class="section">
+      <h2>Summary Comparison</h2>
 
-    <table>
-      <tr>
-        <th>Feature</th>
-        <th>Inline</th>
-        <th>Internal</th>
-        <th>External</th>
-      </tr>
-      <tr>
-        <td>Scope</td>
-        <td>Single</td>
-        <td>Page</td>
-        <td>Multiple</td>
-      </tr>
-      <tr>
-        <td>Priority</td>
-        <td>Highest</td>
-        <td>Medium</td>
-        <td>Lowest</td>
-      </tr>
-      <tr>
-        <td>Maintainability</td>
-        <td>Hard</td>
-        <td>Moderate</td>
-        <td>Easy</td>
-      </tr>
-    </table>
-  </div>
+      <table>
+        <tr>
+          <th>Feature</th>
+          <th>Inline</th>
+          <th>Internal</th>
+          <th>External</th>
+        </tr>
+        <tr>
+          <td>Scope</td>
+          <td>Single</td>
+          <td>Page</td>
+          <td>Multiple</td>
+        </tr>
+        <tr>
+          <td>Priority</td>
+          <td>Highest</td>
+          <td>Medium</td>
+          <td>Lowest</td>
+        </tr>
+        <tr>
+          <td>Maintainability</td>
+          <td>Hard</td>
+          <td>Moderate</td>
+          <td>Easy</td>
+        </tr>
+      </table>
+    </div>
 
-</body>
+    <!-- CSS UNITS -->
+    <div class="section">
+      <h2>CSS Units (Absolute vs Relative)</h2>
+
+      <p>
+        In CSS, units are categorized into <b>absolute</b> (fixed size) and
+        <b>relative</b> (scale based on another value).
+      </p>
+
+      <h3>1. Pixels (px) & Default Browser Sizes</h3>
+
+      <p>
+        The <code>px</code> is an absolute unit. In most modern browsers, the
+        default root font size is <b>16px</b>.
+      </p>
+
+      <table>
+        <tr>
+          <th>Element</th>
+          <th>Default Size (em)</th>
+          <th>Equivalent Pixels (px)</th>
+        </tr>
+        <tr>
+          <td>h1</td>
+          <td>2em</td>
+          <td>32px</td>
+        </tr>
+        <tr>
+          <td>h2</td>
+          <td>1.5em</td>
+          <td>24px</td>
+        </tr>
+        <tr>
+          <td>h3</td>
+          <td>1.17em</td>
+          <td>18.72px</td>
+        </tr>
+        <tr>
+          <td>h4</td>
+          <td>1em</td>
+          <td>16px (Bold)</td>
+        </tr>
+        <tr>
+          <td>h5</td>
+          <td>0.83em</td>
+          <td>13.28px</td>
+        </tr>
+        <tr>
+          <td>h6</td>
+          <td>0.67em</td>
+          <td>10.72px</td>
+        </tr>
+        <tr>
+          <td>p</td>
+          <td>1em</td>
+          <td>16px</td>
+        </tr>
+      </table>
+
+      <h3>2. Relative Units: rem, em, and %</h3>
+
+      <p><b>rem (Root em)</b></p>
+      <ul>
+        <li>Relative to the root (<code>&lt;html&gt;</code>) font size</li>
+        <li><b>Use:</b> Typography & spacing</li>
+        <li><b>Benefit:</b> Scales with user accessibility settings</li>
+      </ul>
+
+      <p><b>em</b></p>
+      <ul>
+        <li>Relative to parent element</li>
+        <li><b>Use:</b> Component-based sizing</li>
+        <li><b>Risk:</b> Compounds (can grow unpredictably)</li>
+      </ul>
+
+      <p><b>% (Percentage)</b></p>
+
+      <ul>
+        <li>Relative to parent property</li>
+        <li><b>Use:</b> Layout widths & responsive design</li>
+        <li><b>Benefit:</b> Fluid layouts</li>
+      </ul>
+
+      <p><b>rem</b> → root based</p>
+      <p><b>em</b> → parent based (can compound)</p>
+      <p><b>%</b> → parent size</p>
+
+      <h3>3. Best Practices</h3>
+
+      <ul>
+        <li>
+          <b>Typography:</b> Use <code>rem</code> for consistency &
+          accessibility
+        </li>
+        <li>
+          <b>Layout:</b> Use <code>%</code>, <code>vw</code>, <code>vh</code>
+        </li>
+        <li><b>Small Details:</b> Use <code>px</code> (borders, shadows)</li>
+        <li><b>Component Spacing:</b> Use <code>em</code></li>
+      </ul>
+
+      <h3>Example</h3>
+
+      <pre>
+html {
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 2rem; /* 32px */
+}
+
+.container {
+  width: 80%;
+}
+
+.button {
+  font-size: 1rem;
+  padding: 0.5em 1em;
+}
+      </pre>
+
+      <h3>4. em vs rem</h3>
+
+      <table>
+        <tr>
+          <th>Feature</th>
+          <th>em</th>
+          <th>rem</th>
+        </tr>
+        <tr>
+          <td>Relative To</td>
+          <td>Parent</td>
+          <td>Root</td>
+        </tr>
+        <tr>
+          <td>Scaling</td>
+          <td>Compounds</td>
+          <td>Stable</td>
+        </tr>
+        <tr>
+          <td>Predictability</td>
+          <td>Hard</td>
+          <td>Easy</td>
+        </tr>
+        <tr>
+          <td>Best Use</td>
+          <td>Components</td>
+          <td>Typography</td>
+        </tr>
+      </table>
+
+      <pre>
+.parent { font-size: 20px; }
+.child { font-size: 1.5em; } /* 30px */
+.grandchild { font-size: 1.5em; } /* 45px 😬 */
+      </pre>
+
+      <pre>
+html { font-size: 16px; }
+.child { font-size: 1.5rem; } /* always 24px */
+      </pre>
+
+      <h3>5. Viewport Units</h3>
+
+      <ul>
+        <li><b>vw</b> → 1% of width</li>
+        <li><b>vh</b> → 1% of height</li>
+        <li><b>vmin</b> → smaller side</li>
+        <li><b>vmax</b> → larger side</li>
+      </ul>
+
+      <pre>
+.hero {
+  width: 100vw;
+  height: 100vh;
+}
+      </pre>
+
+      <p><b>Mobile Fix:</b></p>
+      <pre>height: 100dvh;</pre>
+
+      <!-- INTERACTIVE -->
+      <h3>6. Live Demo</h3>
+
+      <input type="range" min="1" max="3" step="0.1" value="1" id="remSlider" />
+      <span id="remValue">1rem</span>
+
+      <div class="demo-box" id="demoText">This text scales using rem</div>
+
+      <h3>7. px ↔ rem Converter</h3>
+
+      <input type="number" id="pxInput" placeholder="px" />
+      <button onclick="toRem()">→ rem</button>
+
+      <input type="number" id="remInput" placeholder="rem" />
+      <button onclick="toPx()">→ px</button>
+    </div>
+
+    <!-- COLOR THEORY -->
+    <div class="section">
+      <h2>CSS Colors (Color Theory)</h2>
+
+      <p>
+        Colors in CSS define the visual appearance of elements. They can be
+        represented in multiple formats like <b>RGB, RGBA, and Hexadecimal</b>.
+      </p>
+
+      <!-- COLOR MIXING THEORY -->
+      <h3>0. How Colors Actually Work (Additive Color Theory)</h3>
+
+      <p>
+        Screens use <b>RGB (Additive Color Model)</b>. Colors are created by
+        mixing light.
+      </p>
+
+      <ul>
+        <li><b>Red + Green = Yellow</b></li>
+        <li><b>Red + Blue = Magenta</b></li>
+        <li><b>Blue + Green = Cyan</b></li>
+        <li><b>Red + Green + Blue = White</b></li>
+        <li><b>No color (0,0,0) = Black</b></li>
+      </ul>
+
+      <div class="mix-demo">
+        <div class="circle red"></div>
+        <div class="circle green"></div>
+        <div class="circle blue"></div>
+      </div>
+
+      <p>👉 This is why <code>rgb(255,255,0)</code> gives <b>yellow</b>.</p>
+
+      <!-- RGB -->
+      <h3>1. RGB (Red, Green, Blue)</h3>
+
+      <p>RGB defines colors using 3 values from <b>0 to 255</b>.</p>
+
+      <pre>color: rgb(255, 0, 0); /* Red */</pre>
+
+      <ul>
+        <li>255 → full intensity</li>
+        <li>0 → no color</li>
+        <li>Example: rgb(255,255,0) → Yellow</li>
+      </ul>
+
+      <!-- RGBA -->
+      <h3>2. RGBA (With Transparency)</h3>
+
+      <p>RGBA adds <b>alpha (opacity)</b> from 0 to 1.</p>
+
+      <pre>background: rgba(0, 0, 255, 0.5);</pre>
+
+      <ul>
+        <li>1 → fully visible</li>
+        <li>0 → fully transparent</li>
+        <li>Used in overlays, modals, glass UI</li>
+      </ul>
+
+      <!-- HEX -->
+      <h3>3. Hexadecimal (#RRGGBB)</h3>
+
+      <p>Hex uses base-16 values from <b>00 to FF</b>.</p>
+
+      <pre>color: #ff0000; /* Red */</pre>
+
+      <ul>
+        <li>#000000 → Black</li>
+        <li>#ffffff → White</li>
+        <li>#ff0000 → Red</li>
+        <li>Short form: #fff</li>
+      </ul>
+
+      <!-- EXTRA INSIGHT -->
+      <h3>4. RGB vs HEX (Mental Model)</h3>
+
+      <p>
+        RGB is easier to understand logically, while HEX is shorter and widely
+        used.
+      </p>
+
+      <pre>
+rgb(255, 0, 0)  → Red  
+#ff0000         → Same Red
+  </pre
+      >
+
+      <!-- TABLE -->
+      <h3>5. Comparison</h3>
+
+      <table>
+        <tr>
+          <th>Format</th>
+          <th>Example</th>
+          <th>Use Case</th>
+        </tr>
+        <tr>
+          <td>RGB</td>
+          <td>rgb(255,0,0)</td>
+          <td>Learning & clarity</td>
+        </tr>
+        <tr>
+          <td>RGBA</td>
+          <td>rgba(255,0,0,0.5)</td>
+          <td>Transparency</td>
+        </tr>
+        <tr>
+          <td>HEX</td>
+          <td>#ff0000</td>
+          <td>Production</td>
+        </tr>
+      </table>
+
+      <!-- LIVE MIXER -->
+      <h3>6. Live Color Mixer 🎨</h3>
+
+      <p>Adjust RGB sliders to create your own color:</p>
+
+      <label>R:</label>
+      <input type="range" min="0" max="255" value="52" id="r" />
+
+      <label>G:</label>
+      <input type="range" min="0" max="255" value="152" id="g" />
+
+      <label>B:</label>
+      <input type="range" min="0" max="255" value="219" id="b" />
+
+      <label>Opacity:</label>
+      <input type="range" min="0" max="1" step="0.1" value="1" id="a" />
+
+      <p id="colorValue">rgba(52, 152, 219, 1)</p>
+
+      <div class="color-box" id="colorBox">Live Preview</div>
+
+      <!-- HEX -->
+      <h3>7. HEX Converter</h3>
+
+      <button onclick="toHex()">Convert to HEX</button>
+      <p id="hexValue">#3498db</p>
+
+      <!-- BONUS -->
+      <h3>8. Real World Usage Tips</h3>
+
+      <ul>
+        <li><b>Use HEX</b> → most common in projects</li>
+        <li><b>Use RGBA</b> → overlays & shadows</li>
+        <li><b>Use RGB</b> → debugging & learning</li>
+        <li><b>Avoid random colors</b> → use a palette</li>
+      </ul>
+
+      <h3>9. How Many Colors Are Possible? (16.7 Million 🎨)</h3>
+
+      <p>
+        In RGB, each color channel (<b>Red, Green, Blue</b>) can have values
+        from <b>0 to 255</b>.
+      </p>
+
+      <ul>
+        <li>Red → 256 possible values</li>
+        <li>Green → 256 possible values</li>
+        <li>Blue → 256 possible values</li>
+      </ul>
+
+      <p>Total combinations:</p>
+
+      <pre>256 × 256 × 256 = 16,777,216 colors</pre>
+
+      <p>👉 That’s <b>16.7 million possible colors</b> in standard RGB!</p>
+
+      <h4>Example Breakdown</h4>
+
+      <ul>
+        <li><code>rgb(0, 0, 0)</code> → Black (no light)</li>
+        <li><code>rgb(255, 255, 255)</code> → White (full light)</li>
+        <li><code>rgb(255, 0, 0)</code> → Red</li>
+        <li><code>rgb(0, 255, 0)</code> → Green</li>
+        <li><code>rgb(0, 0, 255)</code> → Blue</li>
+      </ul>
+
+      <h4>Why 256?</h4>
+
+      <p>Each color channel uses <b>8 bits</b>:</p>
+
+      <pre>2⁸ = 256 values (0–255)</pre>
+
+      <p>So:</p>
+
+      <pre>3 channels × 8 bits = 24-bit color</pre>
+
+      <p>
+        👉 That’s why standard displays are called <b>24-bit color systems</b>.
+      </p>
+
+      <h4>Fun Insight!</h4>
+
+      <p>
+        Even though 16.7 million sounds huge, modern displays can show even more
+        using techniques like <b>HDR</b> and <b>10-bit color</b>.
+      </p>
+    </div>
+
+    <script>
+      const slider = document.getElementById("remSlider");
+      const text = document.getElementById("demoText");
+      const value = document.getElementById("remValue");
+
+      if (slider) {
+        slider.oninput = function () {
+          text.style.fontSize = this.value + "rem";
+          value.innerText = this.value + "rem";
+        };
+      }
+
+      function toRem() {
+        let px = document.getElementById("pxInput").value;
+        document.getElementById("remInput").value = (px / 16).toFixed(2);
+      }
+
+      function toPx() {
+        let rem = document.getElementById("remInput").value;
+        document.getElementById("pxInput").value = (rem * 16).toFixed(2);
+      }
+
+      const r = document.getElementById("r");
+      const g = document.getElementById("g");
+      const b = document.getElementById("b");
+      const a = document.getElementById("a");
+
+      const colorBox = document.getElementById("colorBox");
+      const colorValue = document.getElementById("colorValue");
+      const hexValue = document.getElementById("hexValue");
+
+      function updateColor() {
+        const red = r.value;
+        const green = g.value;
+        const blue = b.value;
+        const alpha = a.value;
+
+        const rgba = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+
+        colorBox.style.background = rgba;
+        colorValue.innerText = rgba;
+      }
+
+      [r, g, b, a].forEach((slider) => {
+        if (slider) slider.oninput = updateColor;
+      });
+
+      function toHex() {
+        let red = parseInt(r.value).toString(16).padStart(2, "0");
+        let green = parseInt(g.value).toString(16).padStart(2, "0");
+        let blue = parseInt(b.value).toString(16).padStart(2, "0");
+
+        let hex = `#${red}${green}${blue}`;
+        hexValue.innerText = hex;
+      }
+    </script>
+  </body>
 </html>
