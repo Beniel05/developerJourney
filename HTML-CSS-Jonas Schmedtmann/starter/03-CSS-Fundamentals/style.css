@@ -82,3 +82,80 @@ aside {
 /* body {
     background-color: orangered;
 } */
+
+li:first-child {
+  font-weight: bold;
+}
+
+li:last-child {
+  font-style: italic;
+}
+
+li:nth-child(even) {
+  /* color: red; */
+}
+
+/* article p:last-child {
+  color: red;
+}
+  That <p> should be the last child inside article then only this will work (Will work here),
+  for article p:first-child we need a <p> child right after <article> to make that work.
+*/
+
+/* Anchor tags with href => :link */
+a:link {
+  color: #1098ad;
+  text-decoration: none;
+}
+
+/* General every <a> text </a> => even without href="" */
+a {
+  color: red;
+  /* This will not get applied even this is defined lastly - because, (:) has more priority */
+}
+
+a:visited {
+  /* color: #777; 
+  Professional websites keeps the original color for better UX*/
+  color: #1098ad;
+}
+
+a:hover {
+  color: orangered;
+  font-weight: bold;
+   text-decoration: underline orangered;
+}
+
+a:active {
+  background-color: black;
+  font-style: italic;
+}
+
+/* The Order is important [ LVHA -> Love-Hate]
+  :link -> :visited -> :hover -> :active
+*/
+
+/* Resolving Conflicts */
+
+/* 
+#copyright {
+  color: red;
+} // This will be set because of the priority
+
+.copyright {
+  color: blue;
+}
+
+.text {
+  color: yellow;
+} // If there is no styling for that id - this lastly defined class will be applied
+
+footer p {
+ / Element selector has the least priority - inOrder to have this effect - we shouldn't have ID or Class
+  color: green;
+ 
+  color: green !important;
+  / Due to !important -> This will get applied over ID,
+  But this is not a good practice -> Used only when no other options
+} 
+*/
