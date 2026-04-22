@@ -1,0 +1,54 @@
+body {
+    border: 5px solid black;
+    font-family: sans-serif;
+    line-height: 1.4;
+}
+
+.product {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 22px;
+    background: #f7f7f7;
+}
+
+.product-details {
+    text-transform: uppercase;
+}
+
+.price {
+    font-size: 24px;
+}
+
+.shipping {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    color: #777;
+}
+
+.details-list {
+    list-style-type: square;
+}
+
+/* The order for <a> as below Link Visited Hover Active */
+.more-info:link, .more-info:visited {
+    color: #000;
+}
+
+.more-info:hover, .more-info:active {
+    text-decoration: none;
+}
+
+.add-cart-btn {
+    border: none;
+    font-size: 20px;
+    background-color: #000;
+    color: #fff;
+    text-transform: uppercase;
+    cursor:;
+}
+
+.add-cart-btn:hover {
+    background-color: #fff;
+    color: #000;
+}

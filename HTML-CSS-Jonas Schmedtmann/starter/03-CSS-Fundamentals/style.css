@@ -1,11 +1,31 @@
-h1,
-h2,
-h3,
-h4,
-p,
-li {
+/* Lowest priority for this universal (*) selector - and can be overridden by anything
+  * {
+  margin: 0;
+  padding: 0;
+  border-top: 10px solid #1098ad; => No inheritance involved - applied to all the elements 
+  }
+*/
+
+
+/* Inherited to all the children elements */
+body { 
+  /* Inheritance has the least priority so if some element has set different color/font own their own below, this inheritance will be overridden */
   font-family: sans-serif;
   color: #444;
+
+  /* For some properties like the border/margin will not get inherited from a single parent like (body, head, h1). To get that result use * Universal selector*/
+  border-top: 10px solid #1098ad;
+}
+
+.main-header {
+    background-color: #f7f7f7;
+    padding: 20px;
+}
+
+aside {
+    background-color: #f7f7f7;
+    border-top: 5px solid #1098ad;
+    border-bottom: 5px solid #1098ad;
 }
 
 h1,
@@ -67,16 +87,6 @@ li {
 
 .related {
   list-style: none;
-}
-
-.main-header {
-    background-color: #f7f7f7;
-}
-
-aside {
-    background-color: #f7f7f7;
-    border-top: 5px solid #1098ad;
-    border-bottom: 5px solid #1098ad;
 }
 
 /* body {
@@ -159,3 +169,7 @@ footer p {
   But this is not a good practice -> Used only when no other options
 } 
 */
+
+nav {
+  font-size: 18px;
+}
