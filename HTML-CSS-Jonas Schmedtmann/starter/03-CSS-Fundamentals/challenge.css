@@ -20,6 +20,19 @@ body {
     font-size: 22px;
     background: #f7f7f7;
     padding: 15px;
+    position: relative;
+}
+
+.product-title::before {
+    content: "SALE";
+    background-color: #eb5454;
+    color: #fff;
+    padding: 5px 15px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    position: absolute;
+    top: -20px;
+    left: -45px;
 }
 
 .details-title {
@@ -53,10 +66,48 @@ body {
 /* The order for <a> as below Link Visited Hover Active */
 .more-info:link, .more-info:visited {
     color: #000;
+    display: inline-block;
+    margin-bottom: 30px;
 }
 
 .more-info:hover, .more-info:active {
     text-decoration: none;
+}
+
+.colors{
+    
+}
+
+.box {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.black-box {
+    background-color: #000;
+}
+
+.blue-box {
+    background-color: blue;
+}
+
+.red-box {
+    background-color: #ff1818;
+}
+
+.yellow-box {
+    background-color: #ffd000;
+}
+
+.green-box {
+    background-color: #01a40e;
+}
+
+.brown-box {
+    background-color: #6a1111;
+    margin-right: 0;
 }
 
 .add-cart-btn {
