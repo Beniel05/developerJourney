@@ -1,11 +1,24 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: sans-serif;
     line-height: 1.4;
+}
+
+.clearfix::after {
+    /* This whole class properties should be used to give height to the container,
+    because when we use - float the height of the child element will be collapsed to 0*/
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.container {
+    /* background-color: red; */
 }
 
 .product {
@@ -39,11 +52,13 @@ body {
     text-transform: uppercase;
     font-size: 16px;
     margin-bottom: 15px;
-    margin-top: 30px;
 }
 
 .price {
     font-size: 24px;
+    float: left;
+    margin-bottom: 20px;
+    margin-top: 5px;
 }
 
 .shipping {
@@ -52,6 +67,8 @@ body {
     font-weight: bold;
     color: #777;
     margin-bottom: 20px;
+    float: right;
+    margin-top: 14px;
 }
 
 .details-list {
@@ -72,10 +89,6 @@ body {
 
 .more-info:hover, .more-info:active {
     text-decoration: none;
-}
-
-.colors{
-    
 }
 
 .box {
@@ -125,4 +138,27 @@ body {
 .add-cart-btn:hover {
     background-color: #fff;
     color: #000;
+}
+
+.product-img {
+    float: left;
+    margin-right: 40px;
+}
+
+.product-info {
+    float: left;
+    margin-top: 10px;
+    margin-right: 40px;
+    width: 243px;
+}
+
+.product-details {
+    float: left;
+    width: 243px;
+    margin-top: 20px;
+}
+
+.product-description {
+    clear: both;
+    margin-bottom: 10px;
 }
