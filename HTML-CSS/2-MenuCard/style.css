@@ -1,0 +1,75 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: rgb(46, 5, 5);
+    padding: 20px;
+}
+
+.restaurant-header {
+    margin-top: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.golden-color {
+    color: rgb(218, 165, 32);
+}
+
+.hr-gold {
+    border: none;
+    height: 2px;
+    background-color: #d4af37;
+}
+
+.hr-grey {
+    border: none;
+    height: 2px;
+    background-color: #888888;
+    margin: 10px 0;
+}
+
+.font-space {
+    letter-spacing: 10px;
+}
+
+article {
+    margin-top: 20px;
+}
+
+.list-item {
+    margin: 20px 0;
+    list-style: none;
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
+table, th {
+    margin-top: 10px;
+    width: 100vw;
+    text-align: center;
+}
+
+td {
+    padding: 10px;
+}
+
+th {
+    font-size: 1.3rem;
+    padding: 10px 0;
+}
+
+.dish {
+    font-weight: bolder;
+}
+
+/* table, th, td, tr {
+    border: 2px solid rgb(255, 255, 255);
+    border-collapse: collapse;
+    width: 0 80%;
+} */
