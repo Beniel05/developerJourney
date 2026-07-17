@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms Label</title>
+</head>
+<body>
+    
+    <h1>Buttons</h1>
+    
+    <form action="/redirected">
+        
+        <p>
+            <!-- Default button will SUBMIT the form -->
+            <button>Inside form (without attribute - so default => WILL SUBMIT)</button>
+        </p>
+        
+        <!-- This is same like the button outside of the form (We set the type attribute to button) -->
+        <button type="button">Button Inside form (with type attribute set to button -WON'T SUBMIT)</button>
+
+        <!-- label's for attribute's value = should match the input's id value -->
+        <p>
+            <label for="username">Enter Username:</label>
+            <input id="username" type="text" placeholder="username">
+        </p>
+        <!-- p tags are just used to get some space (margin) -->
+        <p>
+            <label for="password">Enter Password:</label>
+            <input id="password" type="password" placeholder="password">
+        </p>
+        <p>
+            <label for="color">Choose a Color:</label>
+            <input id="color" type="color">
+        </p>
+        <p>
+            <!-- Can be also nested like this - but the above formats are good to use - than this format -->
+            <label>
+                Enter a Number:
+                <input id="number" type="number" placeholder="enter a number">
+            </label>
+        </p>
+
+        <p>
+            <button type="submit">Submit Button with type attribute set to submit (WILL SUBMIT)</button> 
+            <!-- Local URL after submitting this form: http://127.0.0.1:5500/redirected? -->
+            <!-- form action's value = redirected [so it'll submit the form to that specified (Endpoint / Form Action / Target Route) ]-->
+        </p>
+    
+        <input type="submit" value="Submit Input Type = submit">
+        <!-- This will also work - but submit typed button is better to use! -->
+
+    </form>
+
+    <hr>
+
+    <!-- When we click this, nothing will happen -->
+    <button>Outside of the form (Normal button)</button>
+
+</body>
+</html>

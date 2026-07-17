@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type Attributes in Form (HTML)</title>
+</head>
+<body>
+    <h1>Type Attributes ( checkbox - radio - selects )</h1>
+
+    <hr>
+
+    <form action="redirected">
+
+        <h2>Checkbox without Checked attribute</h2>
+        <input type="checkbox" name="agree_terms1" id="agree1">
+        <label for="agree1">Agree Terms and Conditions 1 (Un-Checked)</label>
+        
+        <h2>Checkbox with Checked attribute</h2>
+        <input type="checkbox" name="agree_terms2" id="agree2" checked>
+        <label for="agree2">Agree Terms and Conditions 2 (Checked)</label>
+
+        <hr>
+
+        <h2>Radio buttons</h2>
+
+        <h3>Choose 1 Language</h3>
+
+        <!-- We should set the name attribute as same for all of the related radio button. To make only one of them gets selected -->
+        <input type="radio" name="language" id="java" value="Java">
+        <label for="java">Java</label>
+        <!-- The value attribute's String will be passed through the URL when we submit! -->
+        <!-- http://127.0.0.1:5501/Frontend/HTML/2_final/redirected?agree_terms2=on&language=Java -->
+
+        <input type="radio" name="language" id="python" value="Python">
+        <label for="python">Python</label>
+
+        <input type="radio" name="language" id="js" value="JavaScript">
+        <label for="js">JavaScript</label>
+
+        <hr>
+
+        <h2>Select and Option (Dropdown)</h2>
+
+        <label for="course">Select your Qualification</label>
+        <select name="degree" id="course">
+            <!-- Allways the first option will be selected on the webpage when we reload -->
+            <option value="">NONE</option>
+
+            <!-- If we want to force something else to be selected as default when the page gets loaded - use 'selected' attribute -->
+            <option value="bsc" selected>BSc CS</option>
+
+            <option value="bca">BCA</option>
+            <option value="btech">Btech IT</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

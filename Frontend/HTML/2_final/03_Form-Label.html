@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms Label</title>
+</head>
+<body>
+    
+    <h1>Forms Label</h1>
+
+    <form action="#">
+
+        <!-- label's for attribute's value = should match the input's id value -->
+        <p>
+            <label for="username">Enter Username:</label>
+            <input id="username" type="text" placeholder="username">
+        </p>
+        <!-- p tags are just used to get some space (margin) -->
+        <p>
+            <label for="password">Enter Password:</label>
+            <input id="password" type="password" placeholder="password">
+        </p>
+        <p>
+            <label for="color">Choose a Color:</label>
+            <input id="color" type="color">
+        </p>
+        <p>
+            <!-- Can be also nested like this - but the above formats are good to use - than this format -->
+            <label>
+                Enter a Number:
+                <input id="number" type="number" placeholder="enter a number">
+            </label>
+        </p>
+    </form>
+
+</body>
+</html>

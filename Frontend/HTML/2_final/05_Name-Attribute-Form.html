@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms Label</title>
+</head>
+<body>
+    
+    <h1>Forms Name Attribute</h1>
+
+    <form action="/redirected">
+
+        <!-- label's for attribute's value = should match the input's id value -->
+        <p>
+            <label for="username">Enter Username:</label>
+            <input name="username" id="username" type="text" placeholder="username">
+            <!-- Local URL after submitting the form with first name as 'Ben';
+                http://127.0.0.1:5500/redirected?username=Ben 
+                [ /form-action="/redirected" ? name="username" = input entered by user "Ben" ]
+            -->
+        </p>
+        <p>
+            <label for="password">Enter Password:</label>
+            <input name="password" id="password" type="password" placeholder="password">
+        </p>
+        <p>
+            <label for="color">Choose a Color:</label>
+            <input name="color" id="color" type="color">
+        </p>
+        <p>
+            <!-- Can be also nested like this - but the above formats are good to use - than this format -->
+            <label>
+                Enter a Number:
+                <input name="num" id="number" type="number" placeholder="enter a number">
+            </label>
+        </p>
+
+        <button type="submit">Submit</button>
+        <!-- After submitting the URL with user inputs = (Ben) (123) (Red color) (5) = Local URL;
+            http://127.0.0.1:5500/redirected?username=Ben+iel&password=123&color=%23ff0000&num=5
+            
+            form-action = "/redirected" 
+            "?"
+            name="username" userInput="Ben iel" (Ben+iel) "&" 
+            name="password" userInput="123" (123) "&"
+
+            name="color" userInput="Red" (%23ff0000) "&"
+            [%23 is a encoded version of the #] [Red color in HexaDecimal = #ff0000]
+
+            name="num" userInput="5" (5)
+        -->
+    </form>
+
+</body>
+</html>
