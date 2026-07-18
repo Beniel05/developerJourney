@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Race Registration!</title>
+</head>
+<body>
+
+    <h1>Race Registration!</h1>
+
+    <form action="#">
+        <div class="names">
+            <label for="first">First Name</label>
+            <input type="text" name="first-name" id="first" placeholder="first name" required>
+            
+            <label for="last">Last Name</label>
+            <input type="text" name="last-name" id="last" placeholder="last name" required>
+        </div>
+
+        <p>Select a Race:</p>
+        <div>
+            <input type="radio" name="race" id="fun-run" value="funrun">
+            <!-- The 'value' attribute's content will be sent to the server - when submitting the form 'action' -->
+            <label for="fun-run">Fun Run 5k</label>
+        </div>
+        <div>
+            <input type="radio" name="race" id="half" value="half">
+            <!-- URL after submitting: '...&race=half...' : race = half (Value) -->
+            <label for="half">Half Marathon</label>
+        </div>
+        <div>
+            <input type="radio" name="race" id="full" value="full"> 
+            <label for="full">Full Marathon</label>
+        </div>
+
+        <div class="email-pass">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="email" required>
+        
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="password" required>
+        </div>
+    
+        <div>
+            <label for="age-group">Select Age Group</label>
+            <select name="age-group" id="age-group">
+                <option value="kids">under 18</option>
+                <option value="adults">18-30</option>
+                <option value="senior-adults">30-50</option>
+                <option value="seniors">50+</option>
+            </select>
+        </div>
+
+        <button type="submit">Register!</button>
+    </form>
+
+
+
+</body>
+</html>
