@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+<body>
+    <h1>Form Validation</h1>
+
+    <form action="redirected">
+        
+        <h2>Required attribute</h2>
+        <label for="first-name">First Name:</label>
+        <input type="text" name="fname" id="first-name" required>
+        <h4>Cannot submit this form without filling this input</h4>
+
+        <hr>
+
+        <h2>Minlength and Maxlength - attributes</h2>
+        <label for="username">Username should be 4 - 8 characters:</label>
+        <input type="text" name="uname" id="username" required minlength="4" maxlength="8">
+        <h4>You can type more then 8 characters</h4>
+
+        <p>NOTE: min and max attributes for number, range, date, time, ..., typed inputs.</p>
+        <p>NOTE: minlength and maxlength attributes for text typed inputs.</p>
+        <hr>
+
+        <h2>Pattern (Regular Expression) documentation
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/pattern">Pattern (HTML) - MDN</a>
+        </h2>
+
+        <h2>Input URL type documentation 
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/url">URL Input type - MDN</a>
+        </h2>
+        <hr>
+
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
