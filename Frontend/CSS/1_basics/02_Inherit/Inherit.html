@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance in CSS</title>
+    <style>
+        body {
+            color: purple;
+        }
+        section {
+            color: blue;
+        }
+        /* form {
+            color: red;
+        } */
+        input, button {
+            color: inherit;
+            /* This will take the nearest parent's color (inherit) */
+            /* If the form { } uncommented - red color will be applied to these elements */
+            /* Because form is the first nearest Parent */
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS Inheritance</h1>
+    
+    <section>
+        <h2>Sub Heading 1</h2>
+    
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime doloremque sunt enim aliquid in id harum eos asperiores quisquam expedita atque quis sit possimus, hic eius? Quia sit culpa officia facere? Ullam itaque porro ipsum, similique illum ipsa. Incidunt eligendi nesciunt molestias, sequi ipsum a doloribus sunt odit deleniti assumenda.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime doloremque sunt enim aliquid in id harum eos asperiores quisquam expedita atque quis sit possimus, hic eius? Quia sit culpa officia facere? Ullam itaque porro ipsum, similique illum ipsa. Incidunt eligendi nesciunt molestias, sequi ipsum a doloribus sunt odit deleniti assumenda.</p>
+    </section>
+    <section>
+        <h2>Sub Heading 2</h2>
+    
+        <form action="/destination">
+            <label for="username">Username:</label>
+            <input type="text" name="uname" id="username" placeholder="username">
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+</body>
+</html>

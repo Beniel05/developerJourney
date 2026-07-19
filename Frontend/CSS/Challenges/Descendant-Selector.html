@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Descendant Selector</title>
+    <style>
+      header a {
+        color: cyan;
+        background-color: black;
+        font-size: 20px;
+      }
+      p#hate a {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/home">Home</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </header>
+
+    <p>
+      I like to play <a href="/cricket">cricket</a> and
+      <a href="/chess">chess</a>
+    </p>
+
+    <p id="hate">
+      I hate to play <a href="/pickles">football</a> and
+      <a href="/beets">volleyball</a>
+    </p>
+  </body>
+</html>
