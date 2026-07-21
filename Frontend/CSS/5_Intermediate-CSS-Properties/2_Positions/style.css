@@ -1,0 +1,54 @@
+div {
+    width: 100px;
+    height: 100px;
+    background-color: #9f52ab;
+    border: 2px solid black;
+    margin: 10px;
+    display: inline-block;
+
+    /* Prevents inline-block elements with text from appearing lower due to baseline alignment */
+    vertical-align: top;
+}
+
+.middle {
+    background-color: #28a468;
+}
+
+/* static (default) */
+#static .middle {
+    position: static;
+    top: 100px; /* Does nothing because static elements ignore top/left/right/bottom */
+}
+
+/* relative */
+#relative .middle {
+    position: relative;
+    top: 50px;       /* Shifts DOWN 50px from its original layout position */
+    left: -20px;     /* Shifts LEFT 20px from its original layout position */
+}
+
+/* absolute */
+#absolute {
+    position: relative; /* Acts as the boundary anchor for the absolute child */
+    border: 2px solid black;
+}
+
+#absolute .middle {
+    position: absolute;
+    top: 150px;      /* 150px down from the top boundary of #absolute */
+    left: 50px;      /* 50px right from the left boundary of #absolute */
+}
+
+/* fixed */
+#fixed .middle {
+    position: fixed;
+    top: 0;          /* Sticks to the very top edge of the browser viewport */
+    right: 0;        /* Sticks to the very right edge of the browser viewport */
+}
+
+/* sticky */
+
+#sticky .middle {
+    position: sticky;
+    top: 20px;
+}
