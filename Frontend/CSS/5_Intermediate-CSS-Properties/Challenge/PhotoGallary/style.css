@@ -1,0 +1,34 @@
+nav {
+    font-family: Raleway, sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: 800;
+    border-bottom: 2px solid #c6c6c6;
+    width: 30%;
+    margin-left: calc(10% / 6); /* Explanation written below */
+    padding: 1.2em 0;
+}
+
+img {
+    width: 30%;
+    /* margin: 1.667%; */
+    margin: calc(10% / 6);
+}
+
+/* 
+    Horizontally margin on left and right side gives just 2 places  
+    We have 3 imgs in one row, 90% of width taken.
+
+    10% of width is remaining for margin,
+    each img has 2 places (left & right margins) => 3 (imgs) x 2 (places each) = 6%
+
+    But we have 10% free,
+    10% = 100 (full free space)
+    1% = 10
+    6% = 60
+
+    10 / 6 = 1.667.
+    
+    Or simply => 6 x 1.5 = 9% (1% doesn't make much difference)
+    [ Without flexbox ]
+*/
