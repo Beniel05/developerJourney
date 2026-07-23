@@ -1,0 +1,86 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+h1 {
+    text-align: center;
+}
+#container {
+    background-color: #003049;
+    width: 90%;
+    /* height: 500px; */
+    margin: 0 auto;
+    border: 5px solid #003049;
+    
+    display: flex;
+    
+    flex-direction: row;
+    /* row is default. Other than than => row-reverse, column, column-reverse */
+    
+    justify-content: center; 
+    /* flex-start is default. Others => flex-end, space-evenly/ around/ between */
+
+    align-items: flex-start;
+    /* direction is row - so main axis is x (horizontal). So align is (opposite) cross axis here - y (vertical) */
+
+    /* flex-wrap: wrap; */
+    /* no-wrap is default. Others => wrap and wrap-reverse */
+
+    /* align-content: center; */
+    /* This won't work when there is only one row or there is no flex-wrap */
+}
+
+/* div:nth-of-type(2), div:nth-of-type(4) {
+    align-self: center;
+}
+
+div:nth-of-type(3) {
+    align-self: flex-end;
+} */
+
+#container div {
+    height: 200px;
+    width: 200px;
+    /* width: 600px; for wrap */
+
+    /* comment parent's #container height - to visualize this better  */
+    flex-basis: 200px; /* Im giving the same height and width property for flex-grow demonstation */
+    /* this will add the initial size of the item to it's main axis: if row (horizontal) width - if column (vertical) height */
+    
+    /* max-width: 300px;     */
+    
+    flex-basis: 500px; /* Im giving extra width to demonstation flex-shrink */
+}
+
+/* Turning off flex-wrap for this demonstration */
+div:nth-of-type(1) {
+    flex-grow: 1;
+    flex-shrink: 2; /* Shrink faster 2x when page gets smaller */
+}
+
+div:nth-of-type(5) {
+    flex-grow: 2;
+    flex-shrink: 0; /* Won't shrink at all according to the page size */
+}
+
+/* Another example's Styles */
+/* Flex Shorthand Property: Flex grow | Flex Shrink | Flex Basis */
+/* For one value = grow. For two values Check MDN docs */
+main {
+    width: 80%;
+    margin: 0 auto;
+    height: 500px;
+    border: 5px solid #000;
+    display: flex;
+}
+
+main .sidebar {
+    background-color: #c403ff;
+    /* Flex Shorthand Property: Flex grow | Flex Shrink | Flex Basis */
+    flex: 1 10 300px;
+}
+
+main .maincontent {
+    background-color: #003049;
+    /* Flex Shorthand Property: Flex grow | Flex Basis */
+    flex: 2 0.5 800px;
+}
