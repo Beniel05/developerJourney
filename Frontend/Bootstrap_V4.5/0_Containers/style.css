@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.bootstrap-docs-container {
+    background-color: #000;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bootstrap-docs-link {
+    text-decoration: none;
+    font-size: 18px;
+    display: inline-block;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.bootstrap-docs-link:hover {
+    color: #fff;
+    text-decoration: underline;
+    cursor: pointer;
+}
