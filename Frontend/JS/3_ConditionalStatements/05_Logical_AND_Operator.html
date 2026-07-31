@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Checker using Logical Operator</title>
+  </head>
+  <body>
+    <h1 id="text"></h1>
+
+    <script>
+      
+      // && - all conditions have to be true
+      let userInput = prompt("Enter your Password:\n(Note: Password must be 6+ characters. And should not contain any spaces)");
+      if(userInput.length >= 6 && userInput.indexOf(' ') === -1) {
+        document.getElementById("text").innerHTML = "Valid Password";
+      } else {
+        document.getElementById("text").innerHTML = "Invalid Password";
+      }
+    
+    </script>
+  </body>
+</html>

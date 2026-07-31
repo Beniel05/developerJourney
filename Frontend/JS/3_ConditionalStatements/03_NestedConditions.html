@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Checker</title>
+</head>
+<body>
+    <h1 id="text"></h1>
+
+    <script>
+        let password = prompt("Enter your password:\n(Note: Password should be atleast of 6 characters with no spaces)")
+    
+        // For DOM;
+        let text = document.getElementById('text');
+
+        // Better ways to write these conditions - shown in 05_LogicalOperators.html
+        if(password.length >= 6) {
+            let spaces = false;
+            // if(password.indexOf(' ') === -1) // this is a one line instead of that loop. Will return -1 if there is no ' ' in the string.
+            for(let i of password) {
+                if(i == ' ') {
+                    spaces = true;
+                }
+            }
+            if(spaces) {
+                text.innerHTML = "Invalid Password. Password contains spaces"
+                document.body.style.backgroundColor = 'red';
+                document.body.style.color = 'white';
+            } else {
+                text.innerHTML = "Password is Perfect!"
+                document.body.style.backgroundColor = 'green';
+                document.body.style.color = 'white';
+
+            }
+        } else {
+            text.innerHTML = "Invalid Password. Password length is less than 6"
+            document.body.style.backgroundColor = 'red';
+            document.body.style.color = 'white';
+        }
+    </script>
+</body>
+</html>

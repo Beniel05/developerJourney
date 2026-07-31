@@ -1,0 +1,9 @@
+A conditional statement is a programming decision-maker that runs specific code only when a Boolean expression evaluates to true, 
+relying on Boolean logic to control the flow and path of a program
+
+Conditional Statements
+Conditional statements use Boolean logic to ask "yes or no" questions about data and branch the program into different execution paths. 
+The primary structures include: 
+* if statement: Executes a block of code if the condition is true.
+* else if / elif: Checks an additional condition if the previous ones failed.
+* else statement: Acts as a catch-all, running a block of code if all preceding conditions are false.

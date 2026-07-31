@@ -1,0 +1,5 @@
+A REPL is a simple computer programming environment (Browser for JavaScript).
+REPL stands for Read, Evaluate, Print, and Loop. 
+
+It takes a single user input, runs it, and gives back the result right away 
+before waiting for the next command.

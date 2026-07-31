@@ -1,0 +1,57 @@
+/*          1. Implicit String and Numeric Coercion         */
+
+// Tricky behaviors with the plus (+) operator vs other operators
+console.log("5" + 2);     // "52"  (Number 2 is coerced to string)
+console.log("5" - 2);     // 3     (String "5" is coerced to number)
+console.log("5" * "2");   // 10    (Both strings are coerced to numbers)
+
+// Booleans in arithmetic
+console.log(true + 1);    // 2     (true becomes 1)
+console.log(false + 5);   // 5     (false becomes 0)
+
+// When operations fail to produce a valid number
+console.log("hello" - 1); // NaN   ("hello" cannot be converted to a number)
+
+/*             2. The Danger of Loose Equality (==)         */
+
+// Loose equality (allows coercion) vs Strict equality (disallows coercion)
+console.log(false == 0);    // true  (Both side coerced to numbers: 0 == 0)
+console.log(false === 0);   // false (Different types: boolean vs number)
+
+console.log("" == 0);       // true  (Empty string coerces to 0)
+console.log("" === 0);      // false (Different types)
+
+console.log(null == undefined); // true  (Special rule in JS spec)
+console.log(null === undefined);// false (Different types)
+
+/*          3. Boolean Truthy/Falsy Contexts         */
+
+// How JavaScript implicitly forces values to booleans inside an 'if' statement
+
+let username = ""; // Falsy
+if (username) {
+    console.log("Logged in!"); // This will NOT run
+} else {
+    console.log("Guest user"); // This runs because "" is falsy
+}
+
+let cartItems = []; // Truthy (Empty arrays are truthy!)
+if (cartItems) {
+    console.log("Cart exists!"); // This runs!
+}
+
+/*          4. Best Practices: Writing Explicit Code        */
+
+// INSECURE: Relying on implicit coercion
+let input = "42";
+let total = input + 10; 
+console.log(total); // "4210" (Not what you wanted!)
+
+// SECURE: Convert explicitly before operating
+let correctTotal = Number(input) + 10;
+console.log(correctTotal); // 52 (Correct mathematical result)
+
+// Quick Explicit Conversions
+let num = Number("123");   // String to Number
+let str = String(456);     // Number to String
+let bool = Boolean("hi");  // Value to Boolean (true)
