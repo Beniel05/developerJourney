@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number</title>
+</head>
+<body style="background-color: #000;">
+
+<script>
+
+    // Getting the maximum number from the user
+    let maximum = Number(prompt("Enter the maximum number:"));
+
+    // Keep asking until a valid number is entered
+    while (isNaN(maximum) || maximum <= 0) {
+        // also can use [ !maximum ]  => which checks for falsy value [undefined, null, '', 0, etc..,]
+        // Frontend\JS\Demonstration\01_Number-parseInt-isNaN-Falsy.js - Check this file for more info.
+
+        maximum = Number(prompt("Enter a valid positive number:"));
+    }
+
+    // Generate a random number between 1 and maximum (inclusive)
+    const target = Math.floor(Math.random() * maximum) + 1;
+    // console.log(target); // For testing purpose.
+
+    // Get the first guess
+    let guess = prompt("Enter your first guess:");
+    let attempts = 1;
+
+    while (true) {
+
+        // Quit option
+        if (guess.toLowerCase() === "q") {
+            break;
+        }
+
+        // Convert guess to number
+        const numGuess = Number(guess);
+
+        // Handle invalid input
+        if (isNaN(numGuess)) {
+            guess = prompt("Please enter a valid number or 'q' to quit:");
+            continue;
+        }
+
+        // Correct guess
+        if (numGuess === target) {
+            break;
+        }
+
+        // Give hints
+        if (numGuess > target) {
+            guess = prompt("Too High! Guess something lower:");
+        } else {
+            guess = prompt("Too Low! Guess something higher:");
+        }
+
+        attempts++;
+    }
+
+    // Final message
+    if (guess.toLowerCase() === "q") {
+        console.log("Okay, You Quit.");
+    } else {
+        console.log("Congrats! You guessed the number.");
+        console.log(`You took ${attempts} guess(es).`);
+    }
+
+</script>
+
+</body>
+</html>

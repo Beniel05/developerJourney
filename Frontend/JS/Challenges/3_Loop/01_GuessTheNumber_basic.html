@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number</title>
+</head>
+<body style="background-color: #000;">
+
+    <script>
+
+        'use strict';
+
+        const num = Math.floor((Math.random() * 10) + 1);
+        // console.log(num);
+
+        let userInput = Number(prompt("Guess the Number between 1 to 10"));
+
+        while(userInput != num) {
+            userInput = Number(prompt("Incorrect. Try Again (1 to 10)"));
+        }
+
+        alert("Correct! The random number is: " + num);
+        document.body.style.backgroundColor = 'green';
+
+    </script>
+</body>
+</html>

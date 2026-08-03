@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop Until says - Stop</title>
+</head>
+<body style="background-color: #000;">
+    
+    <h1>Enter STOP to end the loop.</h1>
+    <script>
+
+        'use strict';
+        let userInput = prompt("Enter something")
+        while(true) {
+            if(userInput.toLowerCase() !== 'stop') {
+                userInput = prompt(userInput);
+            } else {
+                break; // will exit the loop
+            }
+        }
+        console.log("Stopped");
+
+    </script>
+</body>
+</html>
