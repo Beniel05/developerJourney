@@ -11,6 +11,9 @@ for(let img of allImages) {
     img.src = "https://picsum.photos/200";
 }
 
+heading.textContent = 'Chickens';
+heading.innerHTML += '<sup>Top</sup>';
+
 /*
 / document.getElementById('id') → Returns one single element (the unique match) or null.
 / document.getElementsByTagName('tag') → Returns a live HTMLCollection of all matching elements.
