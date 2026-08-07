@@ -12,6 +12,14 @@ for(let img of allImages) {
 }
 
 /*
+/ document.getElementById('id') → Returns one single element (the unique match) or null.
+/ document.getElementsByTagName('tag') → Returns a live HTMLCollection of all matching elements.
+/ document.getElementsByClassName('class') → Returns a live HTMLCollection of all matching elements.
+/ document.querySelector('selector') → Returns one single element (the very first match) or null.
+/ document.querySelectorAll('selector') → Returns a static NodeList of all matching elements.
+*/
+
+/*
 / Historically, there are three common DOM collections:
 
 * querySelectorAll() return - NodeList
