@@ -1,0 +1,16 @@
+div {
+    text-align: center;
+    display: inline-block;
+}
+
+div img {
+    display: block;
+}
+
+/* .pokemon {
+    display: inline-block;
+    text-align: center;
+}
+.pokemon img {
+    display: block;
+} */
