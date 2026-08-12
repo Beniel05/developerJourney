@@ -1,0 +1,2 @@
+* https://www.codingame.com/playgrounds/347/javascript-promises-mastering-the-asynchronous/what-is-asynchronous-in-javascript
+* https://www.codingame.com/playgrounds/482/javascript-async-and-await-keywords/welcome
