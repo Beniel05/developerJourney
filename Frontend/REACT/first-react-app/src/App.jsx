@@ -10,11 +10,12 @@ function App() {
       <Cat />
 
       {/* Props */}
-      <Greeter name="Alex" age="20" />
+      <Greeter name="Alex" age="20" from="USA" />
       <Greeter name="Bob" age="21" />
+      <Greeter age="22" />
     
       <Die sides={18} />
-      <Die sides={6} />
+      <Die />
       <Die sides={12} />
     </div>
   );
