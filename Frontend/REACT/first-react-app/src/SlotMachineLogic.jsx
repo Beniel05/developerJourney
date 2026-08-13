@@ -1,0 +1,31 @@
+export default function SlotMachineLogic() {
+    // eslint-disable-next-line react-hooks/purity
+    const num1 = Math.floor(Math.random() * 3) + 1;
+    // eslint-disable-next-line react-hooks/purity
+    const num2 = Math.floor(Math.random() * 3) + 1;
+
+    return (
+        <div>
+            <p>Num1: {num1}</p>
+            <p>Num2: {num2}</p>
+            <p className={"bgcHighlight"} style={{borderBottom: "3px solid #ff0000" }}>
+                {(num1 === num2) ? "You Won!" : "Oops, You Lost."}
+            </p>
+        </div>
+    )
+}
+// export default function SlotMachineLogic() {
+//     const num1 = Math.floor(Math.random() * 3) + 1;
+//     const num2 = Math.floor(Math.random() * 3) + 1;
+//     const result = (num1 === num2) ? "You Won!" : "Oops, You Lost."; 
+
+//     return (
+//         <div>
+//             <p>Num1: {num1}</p>
+//             <p>Num2: {num2}</p>
+//             <p className={"bgcHighlight"}>
+//                 {result}
+//             </p>
+//         </div>
+//     )
+// }
