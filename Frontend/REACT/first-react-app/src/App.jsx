@@ -5,7 +5,10 @@ import "./App.css";
 // import Die from './Die.jsx'
 // import ListPicker from "./ListPicker.jsx";
 // import ObjectPicker from "./ObjectPicker.jsx";
-import SlotMachineLogic from "./SlotMachineLogic.jsx";
+// import SlotMachineLogic from "./SlotMachineLogic.jsx";
+// import ColorHeading from "./ColorHeading.jsx";
+// import ColorList from "./ColorList.jsx";
+import SlotMachine from "./SlotMachine.jsx";
 
 function App() {
   return (
@@ -26,10 +29,18 @@ function App() {
 
       <ObjectPicker elements={{ 1: "a", 2: "b", 3: "c" }} />
       <ObjectPicker elements={{ a: 10, b: 20, c: 30 }} /> */}
-    
-        <SlotMachineLogic />
-        <SlotMachineLogic />
-        
+
+      {/* <SlotMachineLogic />
+        <SlotMachineLogic /> */}
+
+      {/* <ColorHeading text="Heading text passed" color="red" /> */}
+
+      {/* <ColorList colors={['red', 'green', 'blue']} />
+        <ColorList colors={['violet', 'orange', 'purple']} /> */}
+
+      <SlotMachine val1="7" val2="7" val3="7" />
+      <SlotMachine val1="7" val2="6" val3="7" />
+      <SlotMachine val1="3" val2="3" val3="3" />
     </div>
   );
 }
