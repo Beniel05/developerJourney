@@ -1,0 +1,13 @@
+ul {
+  list-style-position: inside; /* Pulls the bullet into the text flow */
+  padding-left: 0;             /* Removes the default left spacing */
+}
+
+.picked {
+  color: #c6c6c6;
+  text-decoration: line-through;
+}
+
+.pending {
+  color: red;
+}

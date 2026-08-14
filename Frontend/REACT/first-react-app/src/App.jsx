@@ -8,7 +8,15 @@ import "./App.css";
 // import SlotMachineLogic from "./SlotMachineLogic.jsx";
 // import ColorHeading from "./ColorHeading.jsx";
 // import ColorList from "./ColorList.jsx";
-import SlotMachine from "./SlotMachine.jsx";
+// import SlotMachine from "./SlotMachine.jsx";
+import ShoppingList from "./ShoppingList.jsx";
+
+const itemList = [
+  { item: "eggs", quantity: 6, inBasket: true},
+  { item: "milk", quantity: 1, inBasket: false},
+  {item: "chicken", quantity: 2, inBasket: true},
+  {item: "Soya Chuns", quantity: 3, inBasket: false}
+]
 
 function App() {
   return (
@@ -38,9 +46,11 @@ function App() {
       {/* <ColorList colors={['red', 'green', 'blue']} />
         <ColorList colors={['violet', 'orange', 'purple']} /> */}
 
-      <SlotMachine val1="7" val2="7" val3="7" />
+      {/* <SlotMachine val1="7" val2="7" val3="7" />
       <SlotMachine val1="7" val2="6" val3="7" />
-      <SlotMachine val1="3" val2="3" val3="3" />
+      <SlotMachine val1="3" val2="3" val3="3" /> */}
+
+      <ShoppingList items={itemList} />
     </div>
   );
 }
