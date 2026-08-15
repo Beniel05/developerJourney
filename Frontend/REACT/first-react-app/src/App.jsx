@@ -12,10 +12,10 @@ import "./App.css";
 import ShoppingList from "./ShoppingList.jsx";
 
 const itemList = [
-  { item: "eggs", quantity: 6, inBasket: true},
-  { item: "milk", quantity: 1, inBasket: false},
-  {item: "chicken", quantity: 2, inBasket: true},
-  {item: "Soya Chuns", quantity: 3, inBasket: false}
+  { id: 1, item: "eggs", quantity: 6, inBasket: true},
+  { id: 2, item: "milk", quantity: 1, inBasket: false},
+  { id: 3, item: "chicken", quantity: 2, inBasket: true},
+  { id: 4, item: "Soya Chuns", quantity: 3, inBasket: false}
 ]
 
 function App() {

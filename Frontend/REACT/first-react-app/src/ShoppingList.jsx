@@ -1,15 +1,12 @@
 import "./ShoppingList.css";
+import ShoppingListItem from "./ShoppingListItem";
 
 function ShoppingList({ items }) {
   return (
     <div>
       <ul>
         {items.map((item) => (
-          <li className={item.inBasket ? "picked" : "pending"}>
-            {/* <li style={{ color: item.inBasket? 'grey' : 'red', 
-                text-decoration: item.inBasket? 'line-through' : 'none'}}> */}
-            {item.item} - {item.quantity}
-          </li>
+          <ShoppingListItem key={item.id} item={item} />
         ))}
       </ul>
     </div>
@@ -19,8 +16,8 @@ function ShoppingList({ items }) {
 export default ShoppingList;
 
 // const itemList = [
-//   { item: "eggs", quantity: 6, inBasket: true},
-//   { item: "milk", quantity: 1, inBasket: false},
-//   {item: "chicken", quantity: 2, inBasket: true},
-//   {item: "Soya Chuns", quantity: 3, inBasket: false}
+//   { id: 1, item: "eggs", quantity: 6, inBasket: true},
+//   { id: 2, item: "milk", quantity: 1, inBasket: false},
+//   { id: 3, item: "chicken", quantity: 2, inBasket: true},
+//   { id: 4, item: "Soya Chuns", quantity: 3, inBasket: false}
 // ]
