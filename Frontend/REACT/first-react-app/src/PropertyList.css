@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+}
+
+.property-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000000;
+}
+
+ul {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 30px;
+    padding: 0 10px;
+    /* background-color: #ffffff; */
+}
+
+#each {
+    color: rgb(255, 0, 0);
+    border: 2px solid;
+    padding: 10px;
+}
