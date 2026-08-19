@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Delegation</title>
+    <style>
+      #definition {
+        font-family: "Courier New", Courier, monospace;
+        background-color: #c7c7c7;
+        border-left: 5px solid blue;
+        padding: 10px 20px;
+        text-align: justify;
+        font-size: 18px;
+        line-height: 30px;
+        letter-spacing: 2px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Event Delegation</h1>
+    <p id="definition">
+      Event delegation is a JavaScript design pattern where you attach a single
+      event listener to a parent element to manage events for multiple child
+      elements. Instead of adding individual listeners to every single child,
+      this pattern relies on event bubbling, which means an event triggered on a
+      child element automatically propagates up through its ancestors in the DOM
+      tree.
+    </p>
+
+    <!-- Actual code -->
+
+    <form action="/destination" id="form">
+      <input type="text" name="username" placeholder="username" />
+      <input type="text" name="comment" placeholder="comment" />
+      <button>Post Comment</button>
+    </form>
+
+    <h2>Comments</h2>
+
+    <ul id="list">
+      <!-- Dynamic Comments -->
+       <p>Click the li-s to remove them. But not this &lt;p&gt; child!.</p>
+    </ul>
+
+    <script src="script.js"></script>
+  </body>
+</html>
