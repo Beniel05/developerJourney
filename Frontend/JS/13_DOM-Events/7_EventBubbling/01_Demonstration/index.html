@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Understanding Event Bubbling</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Understanding Event Bubbling in JavaScript</h1>
+
+    <p class="intro-text">
+      Event bubbling is a mechanism where an event triggers on the deepest child
+      element first, then automatically moves up through its parent elements
+      like a bubble rising in water.
+    </p>
+
+    <p class="try-box">
+      <strong>Try it:</strong> Click the inner blue button to watch the alerts
+      pop up sequentially from the child, to the paragraph, and finally to the
+      section.
+    </p>
+
+    <section onclick="alert('Section Clicked')">
+      <h3>Grandparent: Section Element</h3>
+
+      <p onclick="alert('Paragraph Clicked')">
+        <strong>Parent: Paragraph Element</strong>
+
+        <button onclick="alert('Button Clicked')">Child: Click Button</button>
+      </p>
+    </section>
+  </body>
+</html>

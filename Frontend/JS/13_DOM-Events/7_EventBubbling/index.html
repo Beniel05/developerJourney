@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Bubbling</title>
+    <style>
+      .hide {
+        /* display: none; */
+        opacity: 0;
+        cursor: pointer; /* Shows a hand cursor so you know it's clickable */
+      }
+      #container {
+        padding: 0 35%;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div id="container">
+        Click text to hide
+        <button id="btn">Change BgColor</button>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
