@@ -1,5 +1,12 @@
-/* NOTE: Console output position may vary because other code is also executing.
-Focus on which Promise resolves/rejects and whether .then() or .catch() runs. */
+/*
+NOTE: Console output position may vary because other code in this file
+is also executing and Promise callbacks run asynchronously (as microtasks).
+
+Don't focus on the exact position of an output in the console.
+Focus on:
+    fulfilled Promise → .then()
+    rejected Promise  → .catch()
+*/
 
 //* They keyword async before a function - by default will return a promise.
 
@@ -41,18 +48,29 @@ const login = async (username, password) => {
     if(password !== 123) throw ("Invalid Password.")
     return "Logged in Successfully."
 }
+
+// IMPORTANT:
+// Each login() call creates its own Promise.
+// A failure in one call does NOT reject the other calls.
+//
+// login('bob')       → rejected
+// login('bob', '123') → rejected
+// login('bob', 123)   → fulfilled
+//
+// .then() handles a fulfilled Promise.
+// .catch() handles a rejected Promise.
  
-// only passing username and not the password
+/* only passing username and not the password */
 login('bob')
 .then((res) => console.log(res))
 .catch((err) => console.log(err))
 
-// passing both but '123' String password is !== 123 as a Number
+/* passing both but '123' String password is !== 123 as a Number */
 login('bob', '123')
 .then((res) => console.log(res))
 .catch((err) => console.log(err))
 
-// Correct.
+/* Correct.*/
 console.log("THIRD CALL STARTING");
 login('bob', 123)
 .then((res) => console.log(res))
