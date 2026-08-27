@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search TV Shows</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <h1>TV Show Search</h1>
+    <form id="searchForm">
+        <input type="text" placeholder="Enter Title" name="query">
+        <button>Submit</button> 
+        <!-- Button inside a form will works as type = submit by default -->
+    </form>
+
+    <div id="root">
+        <!-- Dynamic Shows -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
