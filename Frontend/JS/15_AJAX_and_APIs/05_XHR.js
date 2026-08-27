@@ -15,7 +15,6 @@ req.onload = function() {
 req.onerror = function() {
     console.log("ERROR");
     console.log(this);
-
 }
 
 req.open("GET", "https://swapi.dev/api/people/1/");
