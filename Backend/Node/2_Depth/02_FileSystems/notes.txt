@@ -1,0 +1,13 @@
+fs.readFileSync() → Reads a file synchronously.
+
+fs.writeFileSync() → Writes to a file. Overwrites existing content.
+
+fs.appendFileSync() → Adds content without overwriting.
+
+fs.mkdirSync() → Creates a directory.
+
+fs.rmdirSync() → Removes a directory. Deprecated for recursive removal; use fs.rmSync() instead.
+
+fs.rmSync() → Removes a file or directory.
+
+fs.unlinkSync() → Removes a file.
