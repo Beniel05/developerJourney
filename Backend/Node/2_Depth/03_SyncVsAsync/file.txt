@@ -1,0 +1,21 @@
+============================================================
+This file is just a normal text file with the .txt extension
+
+NodeJS environment - Event Queue - Event Loop - Blocking & Non-Blocking - Thread Pool - Users & Request / Callback.
+
+🌐 Node.js Core Architecture
+
+NodeJS Environment: A JavaScript runtime built on Chrome's V8 engine that executes server-side code asynchronously.
+
+Users & Requests: Multiple clients hit the server concurrently, generating events that demand data processing.
+
+Blocking vs Non-Blocking: Synchronous code halts the main thread entirely, whereas asynchronous code returns execution control instantly.
+
+Event Queue: A staging area holding completed asynchronous task callbacks waiting for main thread execution.
+
+Event Loop: A single-threaded coordinator that constantly monitors and pushes queue callbacks to the execution stack.
+
+Thread Pool: A background multi-threaded library (libuv) handling heavy system tasks like disk I/O.
+
+Callback: A functional snippet executed by the event loop once an asynchronous operation completes.
+============================================================
