@@ -1,0 +1,5 @@
+Moduele types;
+
+1. Built In modules
+2. 3rd Party (External modules) - npm install / npm i
+3. Custom (our own) modules
