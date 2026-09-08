@@ -11,7 +11,7 @@ class _01_Calculator {
 public class _01_ClassAndObject {
     public static void main(String args[])  {
         
-        Calculator calc = new Calculator();
+        _01_Calculator calc = new _01_Calculator();
 
         int result = calc.add(10, 20);
         System.out.println("Result: " + result);
