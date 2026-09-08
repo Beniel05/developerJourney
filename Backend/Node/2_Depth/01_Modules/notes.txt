@@ -1,4 +1,4 @@
-Moduele types;
+Module types;
 
 1. Built In modules
 2. 3rd Party (External modules) - npm install / npm i

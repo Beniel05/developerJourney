@@ -6,3 +6,6 @@ $ node index.js */
 const fs = require('fs');
 const content = fs.readFileSync('./notes.txt', 'utf-8');
 console.log(content);
+
+// explicitly mentioning built in module using 'node:' prefix;
+const fs1 = require("node:fs");
