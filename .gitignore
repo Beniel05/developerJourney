@@ -4,3 +4,6 @@ README.md
 vscode-setup.md
 
 node_modules
+package-lock.json
+
+*.javac
