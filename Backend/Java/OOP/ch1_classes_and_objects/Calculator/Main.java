@@ -1,4 +1,4 @@
-class _01_Calculator {
+class Calculator {
     int num1;
     int num2;
     public int add(int num1, int num2) {
@@ -8,10 +8,10 @@ class _01_Calculator {
     }
 }
 
-public class _01_ClassAndObject {
+public class Main {
     public static void main(String args[])  {
         
-        _01_Calculator calc = new _01_Calculator();
+        Calculator calc = new Calculator();
 
         int result = calc.add(10, 20);
         System.out.println("Result: " + result);
