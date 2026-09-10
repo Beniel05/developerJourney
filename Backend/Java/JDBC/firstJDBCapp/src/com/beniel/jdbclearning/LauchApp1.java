@@ -7,6 +7,7 @@ public class LauchApp1 {
 
 		// Load and Register the Driver
 		Class.forName("com.mysql.cj.jdbc.Driver");
+		// (or) DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 	
 		// Establish the connection
 		String url = "jdbc:mysql://localhost:3306/jdbclearning";
