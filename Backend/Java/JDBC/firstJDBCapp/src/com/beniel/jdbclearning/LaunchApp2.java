@@ -1,9 +1,12 @@
 package com.beniel.jdbclearning;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class LaunchAppTemplate {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+public class LaunchApp2 {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
         // Load and Register the Driver
         Class.forName("com.mysql.cj.jdbc.Driver");
