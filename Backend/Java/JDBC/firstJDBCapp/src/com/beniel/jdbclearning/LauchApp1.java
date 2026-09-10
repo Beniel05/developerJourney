@@ -19,8 +19,21 @@ public class LauchApp1 {
 		Statement statement = connect.createStatement();
 		
 		// Execute the query
+//		String query = "INSERT INTO studentinfo(id, sname, sage, scity) VALUES(1, 'Alice', 20, 'USA')";
+		String query = "INSERT INTO studentinfo VALUES(2, 'Bob', 20, 'UK')";
+		int noOfRowsAffected = 0;
+		try {			
+			noOfRowsAffected = statement.executeUpdate(query);
+		} catch (Exception e) { // If id gets duplicate entry OR Unknown Column - String/int mismatch
+			System.out.println(e);
+		}
 		
 		// Process the response
+		if(noOfRowsAffected == 0) {
+			System.out.println("Unable to insert data");
+		} else {
+			System.out.println("Data inserted. Rows affected: " + noOfRowsAffected);
+		}
 		
 		// Close all the resources
 		statement.close();
