@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@types/node": "^22.20.2"
+  },
+  "name": "2_customhttpserver",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --watch index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
