@@ -20,7 +20,7 @@ public class LaunchApp1_INSERTING {
 		
 		// Execute the query
 //		String query = "INSERT INTO studentinfo(id, sname, sage, scity) VALUES(1, 'Alice', 20, 'USA')";
-		String query = "INSERT INTO studentinfo VALUES(2, 'Bob', 20, 'UK')";
+		String query = "INSERT INTO studentinfo VALUES(3, 'Charles', 19, 'Florida')";
 		int noOfRowsAffected = 0;
 		try {			
 			noOfRowsAffected = statement.executeUpdate(query);
