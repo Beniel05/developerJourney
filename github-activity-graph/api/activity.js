@@ -1,56 +1,86 @@
-const USERNAME = "Beniel05";
+const DEFAULT_USERNAME = "Beniel05";
 
 export default async function handler(req, res) {
     try {
+        const url = new URL(req.url, "https://example.com");
+        const username =
+            url.searchParams.get("username") || DEFAULT_USERNAME;
+
         const days = 31;
 
-        // Create dates for the last 31 days
-        const dates = [];
-        const activity = {};
-
         const today = new Date();
+        const dates = [];
 
         for (let i = days - 1; i >= 0; i--) {
             const date = new Date(today);
             date.setDate(today.getDate() - i);
-
-            const key = date.toISOString().slice(0, 10);
-
-            dates.push(key);
-            activity[key] = 0;
+            dates.push(date.toISOString().slice(0, 10));
         }
 
-        // Fetch GitHub public events
-        const response = await fetch(
-            `https://api.github.com/users/${USERNAME}/events/public?per_page=100`,
-            {
-                headers: {
-                    Accept: "application/vnd.github+json",
-                    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
+        const from = `${dates[0]}T00:00:00Z`;
+        const to = `${dates[days - 1]}T23:59:59Z`;
+
+        const query = `
+            query($username: String!, $from: DateTime!, $to: DateTime!) {
+                user(login: $username) {
+                    contributionsCollection(from: $from, to: $to) {
+                        contributionCalendar {
+                            weeks {
+                                contributionDays {
+                                    date
+                                    contributionCount
+                                }
+                            }
+                        }
+                    }
                 }
             }
-        );
+        `;
 
-        if (!response.ok) {
-            throw new Error(`GitHub API returned ${response.status}`);
+        const response = await fetch("https://api.github.com/graphql", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+            },
+            body: JSON.stringify({
+                query,
+                variables: {
+                    username,
+                    from,
+                    to,
+                },
+            }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || data.errors) {
+            console.error(data);
+            throw new Error("GitHub GraphQL request failed");
         }
 
-        const events = await response.json();
+        const activity = {};
 
-        // Count commits from PushEvents
-        for (const event of events) {
-            if (event.type !== "PushEvent") continue;
+        for (const date of dates) {
+            activity[date] = 0;
+        }
 
-            const date = event.created_at.slice(0, 10);
+        const weeks =
+            data.data.user.contributionsCollection
+                .contributionCalendar.weeks;
 
-            if (!(date in activity)) continue;
-
-            activity[date] += event.payload?.commits?.length || 0;
+        for (const week of weeks) {
+            for (const day of week.contributionDays) {
+                if (day.date in activity) {
+                    activity[day.date] = day.contributionCount;
+                }
+            }
         }
 
         const values = dates.map(date => activity[date]);
 
-        const svg = generateSVG(dates, values, USERNAME);
+        const svg = generateSVG(dates, values, username);
 
         res.setHeader("Content-Type", "image/svg+xml");
         res.setHeader(
@@ -59,163 +89,97 @@ export default async function handler(req, res) {
         );
 
         res.status(200).send(svg);
-
     } catch (error) {
         console.error(error);
-
-        res.status(500).send(
-            "Failed to generate GitHub activity graph."
-        );
+        res.status(500).send("Failed to generate GitHub activity graph.");
     }
 }
 
-
 function generateSVG(dates, values, username) {
-
     const width = 900;
     const height = 280;
 
     const padding = {
-        top: 45,
+        top: 60,
         right: 30,
-        bottom: 50,
-        left: 50
+        bottom: 45,
+        left: 45,
     };
 
-    const chartWidth =
-        width - padding.left - padding.right;
+    const graphWidth = width - padding.left - padding.right;
+    const graphHeight = height - padding.top - padding.bottom;
 
-    const chartHeight =
-        height - padding.top - padding.bottom;
-
-    const maxValue = Math.max(...values, 1);
+    const max = Math.max(...values, 1);
 
     const points = values.map((value, index) => {
-
         const x =
             padding.left +
-            (index / (values.length - 1)) * chartWidth;
+            (index / (values.length - 1)) * graphWidth;
 
         const y =
             padding.top +
-            chartHeight -
-            (value / maxValue) * chartHeight;
+            graphHeight -
+            (value / max) * graphHeight;
 
-        return { x, y };
+        return `${x},${y}`;
     });
 
-    const linePath = points
-        .map((point, index) =>
-            `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`
-        )
-        .join(" ");
-
-    const areaPath = `
-        ${linePath}
-        L ${points[points.length - 1].x}
-          ${padding.top + chartHeight}
-        L ${points[0].x}
-          ${padding.top + chartHeight}
-        Z
-    `;
-
-    const labels = points
-        .map((point, index) => {
-
-            if (index % 5 !== 0 && index !== points.length - 1) {
-                return "";
-            }
-
-            const date = new Date(
-                dates[index] + "T00:00:00"
-            );
-
-            const label = date.toLocaleDateString(
-                "en-US",
-                {
-                    month: "short",
-                    day: "numeric"
-                }
-            );
-
-            return `
-                <text
-                    x="${point.x}"
-                    y="${height - 15}"
-                    text-anchor="middle"
-                    font-size="11"
-                    fill="#8b949e">
-                    ${label}
-                </text>
-            `;
-        })
-        .join("");
-
-    const circles = points
-        .map(point => `
-            <circle
-                cx="${point.x}"
-                cy="${point.y}"
-                r="3"
-                fill="#58a6ff"
-            />
-        `)
-        .join("");
-
     return `
-<svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="${width}"
-    height="${height}"
-    viewBox="0 0 ${width} ${height}">
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="${width}"
+     height="${height}"
+     viewBox="0 0 ${width} ${height}">
 
-    <rect
-        width="100%"
-        height="100%"
-        rx="12"
-        fill="#0d1117"/>
+    <rect width="100%" height="100%" fill="#0d1117"/>
 
-    <text
-        x="${padding.left}"
-        y="28"
-        font-family="Arial, sans-serif"
-        font-size="16"
-        font-weight="bold"
-        fill="#f0f6fc">
+    <text x="${width / 2}"
+          y="32"
+          text-anchor="middle"
+          fill="#ffffff"
+          font-size="20"
+          font-family="Arial">
         ${username}'s GitHub Activity
     </text>
 
-    <line
-        x1="${padding.left}"
-        y1="${padding.top + chartHeight}"
-        x2="${width - padding.right}"
-        y2="${padding.top + chartHeight}"
-        stroke="#30363d"/>
-
-    <line
-        x1="${padding.left}"
-        y1="${padding.top}"
-        x2="${padding.left}"
-        y2="${padding.top + chartHeight}"
-        stroke="#30363d"/>
-
-    <path
-        d="${areaPath}"
-        fill="#58a6ff"
-        opacity="0.12"/>
-
-    <path
-        d="${linePath}"
+    <polyline
+        points="${points.join(" ")}"
         fill="none"
         stroke="#58a6ff"
         stroke-width="3"
+        stroke-linejoin="round"
         stroke-linecap="round"
-        stroke-linejoin="round"/>
+    />
 
-    ${circles}
+    ${values.map((value, index) => {
+        const [x, y] = points[index].split(",");
 
-    ${labels}
+        return `
+        <circle
+            cx="${x}"
+            cy="${y}"
+            r="3"
+            fill="#58a6ff">
+            <title>${dates[index]}: ${value} contributions</title>
+        </circle>`;
+    }).join("")}
+
+    <text x="${padding.left}"
+          y="${height - 15}"
+          fill="#8b949e"
+          font-size="12"
+          font-family="Arial">
+        ${dates[0]}
+    </text>
+
+    <text x="${width - padding.right}"
+          y="${height - 15}"
+          text-anchor="end"
+          fill="#8b949e"
+          font-size="12"
+          font-family="Arial">
+        ${dates[dates.length - 1]}
+    </text>
 
 </svg>
-    `;
+`;
 }
