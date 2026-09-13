@@ -31,6 +31,17 @@ app.post('/dogs', (req, res) => {
     res.send("POST Request from /dogs !!")
 })
 
+app.get('/r/:subreddit', (req, res) => {
+    // This :subreddit is Path Variable - it's like a placeholde - whatever the path /something after /r/ is taken as 'subreddit'.
+    const { subreddit } = req.params;
+    res.send(`<h1>Visited subreddit: ${subreddit}</h1>`)
+})
+
+app.get('/r/:subreddit/:id', (req, res) => {
+    const { id, subreddit } = req.params;
+    res.send(`ID: ${id} visited '${subreddit}' subreddit`)
+})
+
 // This '*path' should be at the last.
 // This will take care of all other possible GET /paths which are not written by us in the top.
 // If this placed at very beginning all the GET /paths - even written ones - will be ignored by this.
