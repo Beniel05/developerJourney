@@ -42,6 +42,24 @@ app.get('/r/:subreddit/:id', (req, res) => {
     res.send(`ID: ${id} visited '${subreddit}' subreddit`)
 })
 
+// http://localhost:8080/search?q=Testing
+app.get('/search', (req, res) => {
+    const { q } = req.query;
+    if(!q) {
+        res.send(`Nothing found, if nothing searched.`)
+    }
+    res.send(`Here is the search result for: ${q}`);
+})
+
+// http://localhost:8080/search2?q=Testing&color=red
+app.get('/search2', (req, res) => {
+    const { q, color } = req.query;
+    if(!q || !color) {
+        res.send(`Need two queries to provide output in /search2.`)
+    }
+    res.send(`Here is the search result for: ${q} & ${color}`);
+})
+
 // This '*path' should be at the last.
 // This will take care of all other possible GET /paths which are not written by us in the top.
 // If this placed at very beginning all the GET /paths - even written ones - will be ignored by this.
