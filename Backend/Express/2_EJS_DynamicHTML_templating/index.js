@@ -22,6 +22,11 @@ app.get('/rand', (req, res) => {
     // { num } is modern way of using.
 })
 
+app.get('/r/:subreddit', (req, res) => {
+    const {subreddit} = req.params;
+    res.render('subreddit', {subreddit});
+})
+
 app.listen(8080, () => {
     console.log("Server is running in Port 8080");
 })
