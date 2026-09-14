@@ -15,6 +15,13 @@ app.get('/', (req, res) => {
     res.render("home");
 })
 
+app.get('/rand', (req, res) => {
+    const num = Math.floor(Math.random() * 10) + 1;
+    res.render('random', { rand: num }); 
+    // { num: num } (OR) { num }. If any of these passed - we have to mention <%= num %> in random.ejs 
+    // { num } is modern way of using.
+})
+
 app.listen(8080, () => {
     console.log("Server is running in Port 8080");
 })
