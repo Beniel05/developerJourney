@@ -6,6 +6,15 @@
     <title>Random Number</title>
 </head>
 <body>
-    <h1>Here is your random number: <%= rand %></h1>
+    <h1>Here is your random number: <%= rand %> </h1>
+
+        <% if (rand % 2 == 0) { %>
+            <h2>This is an EVEN number!</h2>
+        <% } else { %>
+            <h2>This is an ODD number.</h2>
+        <% } %>
+
+    <h3>That number is: <%= rand % 2 === 0 ? 'EVEN' : 'ODD' %></h3>
+        
 </body>
 </html>

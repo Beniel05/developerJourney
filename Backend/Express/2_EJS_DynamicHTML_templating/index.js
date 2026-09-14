@@ -27,6 +27,11 @@ app.get('/r/:subreddit', (req, res) => {
     res.render('subreddit', {subreddit});
 })
 
+app.get('/cats', (req, res) => {
+    const cats = ["Luna", "Oliver", "Milo", "Bella", "Leo"];
+    res.render('cats', { cats });
+})
+
 app.listen(8080, () => {
     console.log("Server is running in Port 8080");
 })
