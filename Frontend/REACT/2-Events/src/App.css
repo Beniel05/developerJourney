@@ -1,0 +1,10 @@
+body {
+  text-align: center;
+}
+
+#form-submit {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 25px;
+}
