@@ -1,0 +1,19 @@
+body {
+    font-size: 2rem;
+    text-align: center;
+    background-color: #000;
+    color: #ffffff;
+}
+
+button {
+    padding: 10px;
+}
+
+#smiley {
+    width: fit-content;
+    margin: 20px auto;
+    padding-bottom: 7px;
+    cursor: pointer;
+    background-color: #c6c6c6;
+    border-radius: 50%;
+}
