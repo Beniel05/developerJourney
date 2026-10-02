@@ -1,0 +1,32 @@
+.circle {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 0, 0);
+}
+.triangle {
+    width: 0;
+    height: 0;
+    border-bottom: 100px solid red;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+}
+.semicircle {
+    background-color: black;
+    height: 100px;
+    width: 200px;
+    border-radius: 0 0 100px 100px;
+}
+.semicircle2 {
+    background-color: black;
+    height: 200px;
+    width: 400px;
+    border-radius: 0 0 200px 200px;
+}
+.triangle2 {
+    width: 0;
+    height: 0;
+    border-bottom: 200px solid red;
+    border-left: 200px solid transparent;
+    border-right: 200px solid transparent;
+}
