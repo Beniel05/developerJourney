@@ -543,54 +543,30 @@ function generateSVG(
 function getNiceMaximum(maxValue) {
 
     if (maxValue <= 0) {
-        return 5;
+        return 4;
     }
 
-    if (maxValue <= 5) {
-        return 5;
-    }
-
-    if (maxValue <= 10) {
-        return 10;
-    }
-
-    if (maxValue <= 20) {
-        return 20;
-    }
-
-    if (maxValue <= 50) {
-        return Math.ceil(maxValue / 10) * 10;
-    }
-
-    if (maxValue <= 100) {
-        return Math.ceil(maxValue / 20) * 20;
-    }
-
-    return Math.ceil(maxValue / 50) * 50;
+    return Math.ceil(maxValue / 2) * 2;
 }
 
 
 function getNiceStep(maxValue) {
 
-    if (maxValue <= 7) {
-        return 1;
-    }
-
-    if (maxValue <= 14) {
+    if (maxValue <= 10) {
         return 2;
     }
 
     if (maxValue <= 20) {
-        return 5;
+        return 2;
     }
 
-    if (maxValue <= 50) {
-        return 10;
+    if (maxValue <= 40) {
+        return 4;
     }
 
     if (maxValue <= 100) {
-        return 20;
+        return 10;
     }
 
-    return 50;
+    return 20;
 }
