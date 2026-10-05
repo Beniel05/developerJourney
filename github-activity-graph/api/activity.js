@@ -12,12 +12,18 @@ export default async function handler(req, res) {
 
         const today = new Date();
 
-        // Last 31 days
+        // --------------------------------------------------
+        // Generate the last 31 days
+        // --------------------------------------------------
+
         for (let i = days - 1; i >= 0; i--) {
             const date = new Date(today);
+
             date.setDate(today.getDate() - i);
 
-            dates.push(date.toISOString().slice(0, 10));
+            dates.push(
+                date.toISOString().slice(0, 10)
+            );
         }
 
         const from = `${dates[0]}T00:00:00Z`;
@@ -30,7 +36,10 @@ export default async function handler(req, res) {
         const query = `
             query($username: String!, $from: DateTime!, $to: DateTime!) {
                 user(login: $username) {
-                    contributionsCollection(from: $from, to: $to) {
+                    contributionsCollection(
+                        from: $from
+                        to: $to
+                    ) {
                         contributionCalendar {
                             weeks {
                                 contributionDays {
@@ -146,7 +155,7 @@ export default async function handler(req, res) {
 
 
 // ==========================================================
-// SVG
+// SVG GENERATOR
 // ==========================================================
 
 function generateSVG(
@@ -158,10 +167,10 @@ function generateSVG(
     const height = 340;
 
     const padding = {
-        top: 55,
+        top: 60,
         right: 35,
-        bottom: 65,
-        left: 65,
+        bottom: 70,
+        left: 75,
     };
 
     const graphWidth =
@@ -185,7 +194,7 @@ function generateSVG(
         getNiceMaximum(maxValue);
 
     const yStep =
-        getNiceStep(yMax);
+        getNiceStep(maxValue);
 
     const yTicks = [];
 
@@ -195,11 +204,6 @@ function generateSVG(
         value += yStep
     ) {
         yTicks.push(value);
-    }
-
-    // Make sure the maximum is included
-    if (yTicks[yTicks.length - 1] < yMax) {
-        yTicks.push(yMax);
     }
 
     // ------------------------------------------------------
@@ -228,7 +232,7 @@ function generateSVG(
     );
 
     // ------------------------------------------------------
-    // Smooth curve
+    // Smooth line
     // ------------------------------------------------------
 
     let linePath =
@@ -255,7 +259,7 @@ function generateSVG(
     }
 
     // ------------------------------------------------------
-    // Area underneath curve
+    // Filled area
     // ------------------------------------------------------
 
     const baselineY =
@@ -280,7 +284,7 @@ function generateSVG(
             (value / yMax) *
             graphHeight;
 
-        // Horizontal grid
+        // Grid line
         yAxis += `
             <line
                 x1="${padding.left}"
@@ -289,19 +293,20 @@ function generateSVG(
                 y2="${y}"
                 stroke="#30363d"
                 stroke-width="1"
-                stroke-dasharray="2 3"
+                stroke-dasharray="3 4"
                 opacity="0.75"
             />
         `;
 
-        // Y-axis label
+        // Y-axis number
         yAxis += `
             <text
-                x="${padding.left - 12}"
-                y="${y + 4}"
+                x="${padding.left - 14}"
+                y="${y + 5}"
                 text-anchor="end"
-                fill="#8b949e"
-                font-size="10"
+                fill="#c9d1d9"
+                font-size="13"
+                font-weight="600"
                 font-family="Arial, sans-serif"
             >
                 ${value}
@@ -324,7 +329,9 @@ function generateSVG(
             points[i];
 
         const date =
-            new Date(`${dates[i]}T00:00:00Z`);
+            new Date(
+                `${dates[i]}T00:00:00Z`
+            );
 
         const day =
             date.getUTCDate();
@@ -338,6 +345,18 @@ function generateSVG(
                 }
             );
 
+        const previousDate =
+            i > 0
+                ? new Date(
+                    `${dates[i - 1]}T00:00:00Z`
+                )
+                : null;
+
+        const monthChanged =
+            i === 0 ||
+            previousDate.getUTCMonth() !==
+            date.getUTCMonth();
+
         // Vertical grid
         xAxis += `
             <line
@@ -347,45 +366,36 @@ function generateSVG(
                 y2="${baselineY}"
                 stroke="#30363d"
                 stroke-width="1"
-                stroke-dasharray="2 3"
-                opacity="0.35"
+                stroke-dasharray="2 4"
+                opacity="0.3"
             />
         `;
 
-        // Actual calendar day
+        // Actual day number
         xAxis += `
             <text
                 x="${point.x}"
-                y="${baselineY + 18}"
+                y="${baselineY + 20}"
                 text-anchor="middle"
-                fill="#8b949e"
-                font-size="9"
+                fill="#c9d1d9"
+                font-size="12"
+                font-weight="600"
                 font-family="Arial, sans-serif"
             >
                 ${day}
             </text>
         `;
 
-        // Show month name at the beginning
-        // of every month
-        const previousDate =
-            i > 0
-                ? new Date(`${dates[i - 1]}T00:00:00Z`)
-                : null;
-
-        if (
-            i === 0 ||
-            previousDate.getUTCMonth() !==
-                date.getUTCMonth()
-        ) {
+        // Month label when month changes
+        if (monthChanged) {
             xAxis += `
                 <text
                     x="${point.x}"
-                    y="${baselineY + 34}"
+                    y="${baselineY + 42}"
                     text-anchor="middle"
-                    fill="#8b949e"
-                    font-size="9"
-                    font-weight="600"
+                    fill="#c9d1d9"
+                    font-size="13"
+                    font-weight="700"
                     font-family="Arial, sans-serif"
                 >
                     ${month}
@@ -412,7 +422,7 @@ function generateSVG(
             <circle
                 cx="${point.x}"
                 cy="${point.y}"
-                r="3"
+                r="3.5"
                 fill="#3fb950"
             >
                 <title>
@@ -444,20 +454,20 @@ function generateSVG(
     <!-- Title -->
     <text
         x="${width / 2}"
-        y="30"
+        y="32"
         text-anchor="middle"
         fill="#ffffff"
-        font-size="16"
-        font-weight="600"
+        font-size="18"
+        font-weight="700"
         font-family="Arial, sans-serif"
     >
         ${username}'s Contribution Graph
     </text>
 
-    <!-- Grid + Y axis -->
+    <!-- Y-axis and horizontal grid -->
     ${yAxis}
 
-    <!-- X axis grid + dates -->
+    <!-- X-axis and vertical grid -->
     ${xAxis}
 
     <!-- Left vertical axis -->
@@ -467,7 +477,7 @@ function generateSVG(
         x2="${padding.left}"
         y2="${baselineY}"
         stroke="#484f58"
-        stroke-width="1"
+        stroke-width="1.5"
     />
 
     <!-- Bottom horizontal axis -->
@@ -477,14 +487,14 @@ function generateSVG(
         x2="${width - padding.right}"
         y2="${baselineY}"
         stroke="#484f58"
-        stroke-width="1"
+        stroke-width="1.5"
     />
 
-    <!-- Area -->
+    <!-- Green filled area -->
     <path
         d="${areaPath}"
         fill="#238636"
-        opacity="0.15"
+        opacity="0.18"
     />
 
     <!-- Green activity line -->
@@ -492,26 +502,27 @@ function generateSVG(
         d="${linePath}"
         fill="none"
         stroke="#3fb950"
-        stroke-width="2.5"
+        stroke-width="3"
         stroke-linejoin="round"
         stroke-linecap="round"
     />
 
-    <!-- Points -->
+    <!-- Activity points -->
     ${circles}
 
-    <!-- Y axis title -->
+    <!-- Y-axis title -->
     <text
-        x="18"
+        x="20"
         y="${padding.top + graphHeight / 2}"
         text-anchor="middle"
-        fill="#8b949e"
-        font-size="10"
+        fill="#c9d1d9"
+        font-size="12"
+        font-weight="600"
         font-family="Arial, sans-serif"
         transform="
             rotate(
                 -90
-                18
+                20
                 ${padding.top + graphHeight / 2}
             )
         "
@@ -519,13 +530,14 @@ function generateSVG(
         Contributions
     </text>
 
-    <!-- X axis title -->
+    <!-- X-axis title -->
     <text
         x="${width / 2}"
-        y="${height - 8}"
+        y="${height - 10}"
         text-anchor="middle"
-        fill="#8b949e"
-        font-size="10"
+        fill="#c9d1d9"
+        font-size="12"
+        font-weight="600"
         font-family="Arial, sans-serif"
     >
         Days
@@ -537,7 +549,7 @@ function generateSVG(
 
 
 // ==========================================================
-// Nice Y-axis scaling
+// Y-AXIS SCALING
 // ==========================================================
 
 function getNiceMaximum(maxValue) {
@@ -551,10 +563,6 @@ function getNiceMaximum(maxValue) {
 
 
 function getNiceStep(maxValue) {
-
-    if (maxValue <= 10) {
-        return 2;
-    }
 
     if (maxValue <= 20) {
         return 2;
