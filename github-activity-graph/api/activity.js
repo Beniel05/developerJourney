@@ -72,6 +72,7 @@ export default async function handler(req, res) {
 
         if (!response.ok || data.errors) {
             console.error(data);
+
             throw new Error(
                 "GitHub GraphQL request failed"
             );
@@ -135,7 +136,6 @@ export default async function handler(req, res) {
         res.status(200).send(svg);
 
     } catch (error) {
-
         console.error(error);
 
         res.status(500).send(
@@ -154,14 +154,13 @@ function generateSVG(
     values,
     username
 ) {
-
-    const width = 900;
-    const height = 300;
+    const width = 1200;
+    const height = 340;
 
     const padding = {
-        top: 50,
-        right: 30,
-        bottom: 55,
+        top: 55,
+        right: 35,
+        bottom: 65,
         left: 65,
     };
 
@@ -175,14 +174,33 @@ function generateSVG(
         padding.top -
         padding.bottom;
 
+    // ------------------------------------------------------
+    // Dynamic Y-axis
+    // ------------------------------------------------------
+
     const maxValue =
-        Math.max(...values, 1);
+        Math.max(...values, 0);
 
-    // Round Y-axis maximum upward
     const yMax =
-        Math.ceil(maxValue / 2) * 2 || 2;
+        getNiceMaximum(maxValue);
 
-    const ySteps = 5;
+    const yStep =
+        getNiceStep(yMax);
+
+    const yTicks = [];
+
+    for (
+        let value = 0;
+        value <= yMax;
+        value += yStep
+    ) {
+        yTicks.push(value);
+    }
+
+    // Make sure the maximum is included
+    if (yTicks[yTicks.length - 1] < yMax) {
+        yTicks.push(yMax);
+    }
 
     // ------------------------------------------------------
     // Coordinates
@@ -202,10 +220,12 @@ function generateSVG(
                 (value / yMax) *
                 graphHeight;
 
-            return { x, y };
+            return {
+                x,
+                y,
+            };
         }
     );
-
 
     // ------------------------------------------------------
     // Smooth curve
@@ -214,10 +234,16 @@ function generateSVG(
     let linePath =
         `M ${points[0].x} ${points[0].y}`;
 
-    for (let i = 1; i < points.length; i++) {
+    for (
+        let i = 1;
+        i < points.length;
+        i++
+    ) {
+        const previous =
+            points[i - 1];
 
-        const previous = points[i - 1];
-        const current = points[i];
+        const current =
+            points[i];
 
         const controlX =
             (previous.x + current.x) / 2;
@@ -227,7 +253,6 @@ function generateSVG(
             `${controlX} ${current.y}, ` +
             `${current.x} ${current.y}`;
     }
-
 
     // ------------------------------------------------------
     // Area underneath curve
@@ -242,26 +267,20 @@ function generateSVG(
         ` L ${points[0].x} ${baselineY}` +
         ` Z`;
 
-
     // ------------------------------------------------------
-    // Y-axis labels
+    // Y-axis + horizontal grid
     // ------------------------------------------------------
 
     let yAxis = "";
 
-    for (let i = 0; i <= ySteps; i++) {
-
-        const value =
-            Math.round(
-                (yMax / ySteps) * i
-            );
+    for (const value of yTicks) {
 
         const y =
             baselineY -
             (value / yMax) *
             graphHeight;
 
-        // Grid line
+        // Horizontal grid
         yAxis += `
             <line
                 x1="${padding.left}"
@@ -271,13 +290,14 @@ function generateSVG(
                 stroke="#30363d"
                 stroke-width="1"
                 stroke-dasharray="2 3"
+                opacity="0.75"
             />
         `;
 
-        // Label
+        // Y-axis label
         yAxis += `
             <text
-                x="${padding.left - 10}"
+                x="${padding.left - 12}"
                 y="${y + 4}"
                 text-anchor="end"
                 fill="#8b949e"
@@ -289,16 +309,34 @@ function generateSVG(
         `;
     }
 
-
     // ------------------------------------------------------
     // X-axis
     // ------------------------------------------------------
 
     let xAxis = "";
 
-    for (let i = 0; i < dates.length; i++) {
+    for (
+        let i = 0;
+        i < dates.length;
+        i++
+    ) {
+        const point =
+            points[i];
 
-        const point = points[i];
+        const date =
+            new Date(`${dates[i]}T00:00:00Z`);
+
+        const day =
+            date.getUTCDate();
+
+        const month =
+            date.toLocaleString(
+                "en-US",
+                {
+                    month: "short",
+                    timeZone: "UTC",
+                }
+            );
 
         // Vertical grid
         xAxis += `
@@ -310,25 +348,51 @@ function generateSVG(
                 stroke="#30363d"
                 stroke-width="1"
                 stroke-dasharray="2 3"
-                opacity="0.6"
+                opacity="0.35"
             />
         `;
 
-        // Day number
+        // Actual calendar day
         xAxis += `
             <text
                 x="${point.x}"
-                y="${baselineY + 16}"
+                y="${baselineY + 18}"
                 text-anchor="middle"
                 fill="#8b949e"
                 font-size="9"
                 font-family="Arial, sans-serif"
             >
-                ${i + 1}
+                ${day}
             </text>
         `;
-    }
 
+        // Show month name at the beginning
+        // of every month
+        const previousDate =
+            i > 0
+                ? new Date(`${dates[i - 1]}T00:00:00Z`)
+                : null;
+
+        if (
+            i === 0 ||
+            previousDate.getUTCMonth() !==
+                date.getUTCMonth()
+        ) {
+            xAxis += `
+                <text
+                    x="${point.x}"
+                    y="${baselineY + 34}"
+                    text-anchor="middle"
+                    fill="#8b949e"
+                    font-size="9"
+                    font-weight="600"
+                    font-family="Arial, sans-serif"
+                >
+                    ${month}
+                </text>
+            `;
+        }
+    }
 
     // ------------------------------------------------------
     // Data points
@@ -336,9 +400,13 @@ function generateSVG(
 
     let circles = "";
 
-    for (let i = 0; i < points.length; i++) {
-
-        const point = points[i];
+    for (
+        let i = 0;
+        i < points.length;
+        i++
+    ) {
+        const point =
+            points[i];
 
         circles += `
             <circle
@@ -353,7 +421,6 @@ function generateSVG(
             </circle>
         `;
     }
-
 
     // ------------------------------------------------------
     // Final SVG
@@ -374,28 +441,24 @@ function generateSVG(
         fill="#161b22"
     />
 
-
     <!-- Title -->
     <text
         x="${width / 2}"
-        y="28"
+        y="30"
         text-anchor="middle"
         fill="#ffffff"
-        font-size="15"
+        font-size="16"
         font-weight="600"
         font-family="Arial, sans-serif"
     >
         ${username}'s Contribution Graph
     </text>
 
-
     <!-- Grid + Y axis -->
     ${yAxis}
 
-
-    <!-- X axis grid -->
+    <!-- X axis grid + dates -->
     ${xAxis}
-
 
     <!-- Left vertical axis -->
     <line
@@ -407,7 +470,6 @@ function generateSVG(
         stroke-width="1"
     />
 
-
     <!-- Bottom horizontal axis -->
     <line
         x1="${padding.left}"
@@ -418,7 +480,6 @@ function generateSVG(
         stroke-width="1"
     />
 
-
     <!-- Area -->
     <path
         d="${areaPath}"
@@ -426,21 +487,18 @@ function generateSVG(
         opacity="0.15"
     />
 
-
     <!-- Green activity line -->
     <path
         d="${linePath}"
         fill="none"
         stroke="#3fb950"
-        stroke-width="2"
+        stroke-width="2.5"
         stroke-linejoin="round"
         stroke-linecap="round"
     />
 
-
     <!-- Points -->
     ${circles}
-
 
     <!-- Y axis title -->
     <text
@@ -451,17 +509,20 @@ function generateSVG(
         font-size="10"
         font-family="Arial, sans-serif"
         transform="
-            rotate(-90 18 ${padding.top + graphHeight / 2})
+            rotate(
+                -90
+                18
+                ${padding.top + graphHeight / 2}
+            )
         "
     >
         Contributions
     </text>
 
-
     <!-- X axis title -->
     <text
         x="${width / 2}"
-        y="${height - 10}"
+        y="${height - 8}"
         text-anchor="middle"
         fill="#8b949e"
         font-size="10"
@@ -472,4 +533,64 @@ function generateSVG(
 
 </svg>
 `;
+}
+
+
+// ==========================================================
+// Nice Y-axis scaling
+// ==========================================================
+
+function getNiceMaximum(maxValue) {
+
+    if (maxValue <= 0) {
+        return 5;
+    }
+
+    if (maxValue <= 5) {
+        return 5;
+    }
+
+    if (maxValue <= 10) {
+        return 10;
+    }
+
+    if (maxValue <= 20) {
+        return 20;
+    }
+
+    if (maxValue <= 50) {
+        return Math.ceil(maxValue / 10) * 10;
+    }
+
+    if (maxValue <= 100) {
+        return Math.ceil(maxValue / 20) * 20;
+    }
+
+    return Math.ceil(maxValue / 50) * 50;
+}
+
+
+function getNiceStep(maxValue) {
+
+    if (maxValue <= 5) {
+        return 1;
+    }
+
+    if (maxValue <= 10) {
+        return 2;
+    }
+
+    if (maxValue <= 20) {
+        return 5;
+    }
+
+    if (maxValue <= 50) {
+        return 10;
+    }
+
+    if (maxValue <= 100) {
+        return 20;
+    }
+
+    return 50;
 }
