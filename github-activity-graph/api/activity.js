@@ -572,11 +572,11 @@ function getNiceMaximum(maxValue) {
 
 function getNiceStep(maxValue) {
 
-    if (maxValue <= 5) {
+    if (maxValue <= 7) {
         return 1;
     }
 
-    if (maxValue <= 10) {
+    if (maxValue <= 14) {
         return 2;
     }
 
